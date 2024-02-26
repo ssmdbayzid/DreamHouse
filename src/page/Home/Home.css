@@ -1,0 +1,33 @@
+
+
+.swiper-pagination {
+  padding-bottom: 0 importent;
+}
+
+/* new styles added */
+.swiper-button {
+    /* display: flex; */
+    position: absolute;
+    top: calc(50% - 100px);
+    z-index: 10;
+    cursor: pointer;
+    padding: 16px 1px;
+    background: rgba(0, 0, 0, 0.5);
+    
+    color: white;
+  }
+  .swiper-button svg {
+    width: 3rem;
+    height: 3rem;
+  }
+  .image-swiper-button-prev {
+    left: 0px;
+    
+  }
+  .image-swiper-button-next {
+    right: 0px;
+  }
+  .swiper-button-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
