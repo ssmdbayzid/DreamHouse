@@ -1,80 +1,78 @@
 import React from 'react'
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-// import 'swiper/css/navigation';
-
-// import './styles.css';
-
-// import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-
 const HeroSection = () => {
   return (
-    <div >
-        
-        
-        <div className='relative h-screen'>
-          {/* --------------- Forward Arrow -------------- */}
-        {/* <div className=" swiper-button image-swiper-button-next">
-        <IoIosArrowForward />
-      </div> */}
-
-          {/*--------------- Backwar Arrow --------------*/}
-      {/* <div className="swiper-button image-swiper-button-prev">
-        <IoIosArrowBack />
-      </div> */}
-      <Swiper      
-        slidesPerView={1}
-        // spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,          
-        }}
-        
-        // speed={1200}
-        // autoplay={{
-        //   delay: 3000,
-        //   disableOnInteraction: false,
-        // }}
-        navigation={{
-          nextEl: ".image-swiper-button-next",
-          prevEl: ".image-swiper-button-prev",
-          disabledClass: "swiper-button-disabled"
-        }}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper w-full h-screen"
-      >
-        <SwiperSlide className=' relative bg-cover bg-center'>
-          <img src="https://homepress.stylemixthemes.com/main/wp-content/uploads/sites/3/2021/03/property-img-1.jpg" alt="" srcSet="" className='block w-full'/>
-          <div  className="absolute bg-black/20 py-4 px-6 w-2/3  top-1/2 transform -translate-y-1/2 translate-x-[25%]    ">
-        <h1 className="text-6xl text-center font-semibold text-white">Awesome Family Home</h1>
-        <p className='text-white text-2xl mt-8 text-center'>Ideal theme for any construction buiness you nedd
-          <br />
-          With Visual Composer, Revoulation Slider and other awesome <br />
-          features, just got batter, With new options you can't go wrong.
-        </p>
-      </div>
-          </SwiperSlide>
-          <SwiperSlide className=' relative bg-cover bg-center'>
-          <img src="https://homepress.stylemixthemes.com/main/wp-content/uploads/sites/3/2021/03/shutterstock_436573321-min-1.jpg" alt="" srcSet="" className='block w-full'/>
-          <div  className="absolute bg-black/20 py-4 px-6 w-2/3  top-1/2 transform -translate-y-1/2 translate-x-[25%]    ">
-        <h1 className="text-6xl text-center font-semibold text-white">Constriction Its Best</h1>
-        <p className='text-white text-2xl mt-8 text-center'>Ideal theme for any construction buiness you nedd
-          <br />
-          With Visual Composer, Revoulation Slider and other awesome <br />
-          features, just got batter, With new options you can't go wrong.
-        </p>
-      </div>
-          </SwiperSlide>
+    <div className="">
+ {/* ------------- Hero Section Start ---------------- */}
+ <section className="relative bg-[url('https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg')] bg-cover bg-center bg-no-repeat">
+    <div className="min-h-[90vh] w-full bg-black/40 flex flex-col  items-center justify-center">
+      <div className="w-[500px]">
        
-      </Swiper>
+        <h1 className="heading text-center text-white">
+        Luxury Residence here <br />
+          <span className="">Your Perfect Home</span>
+        </h1>
+        <p className='text-para text-slate-200' >Whether you're looking to sell or let your home  or want to buy
+or rent a home, we really are the people  for you to come to.</p>
+      </div>
+      {/* ------------- Hero Section End ---------------- */}
+  <div className=" w-3/5 mt-10 mx-auto">
+    <form
+      action=""
+      className=" bg-white flex md:flex-row flex-col justify-canter gap-10 items-center px-8 py-8 shadow-2xl rounded-md"
+    >
+      <div className="flex flex-col w-full md:w-2/5">
+        <label className="font-bold mb-2" htmlFor="location">
+          Location
+        </label>
+        <input
+          id="location"
+          type="text"
+          className="focus:outline focus:outline-slate-200 px-3 rounded-md py-2 text-md"
+          placeholder="Enter an address, state, city, area or zip code"
+        />
+      </div>
+      <div className="flex flex-col w-full md:max-w-40">
+        <label className="font-bold mb-2" htmlFor="type">
+          Type
+        </label>
+        <select
+          name="type"
+          id="type"
+          className="px-3 py-3 bg-slate-100 rounded-md border-none"
+        >
+          <option value="">Property type</option>
+          <option value="retals">Retals</option>
+          <option value="sales">Sales</option>
+        </select>
+      </div>
+      <div className="flex flex-col w-full md:max-w-40">
+        <label className="font-bold mb-2" htmlFor="category">
+          Category
+        </label>
+        <select
+          name="category"
+          id="category"
+          className="px-3 py-3 bg-slate-100 rounded-md border-none"
+        >
+          <option value="">Category</option>
+          <option value="apartment">Apartment</option>
+          <option value="condos">Condos</option>
+          <option value="duplexes">Duplexes</option>
+          <option value="houses">Houses</option>
+          <option value="villa's">Villa's</option>
+        </select>
+      </div>
+      <button className="bg-primaryColor mt-auto w-full md:w-1/3  py-3.5 rounded-full text-white font-semibold">
+        Submit
+      </button>
+    </form>
+   
+  </div>
     </div>
-        
-    </div>
+  </section>
+  
+  </div>
   )
 }
 

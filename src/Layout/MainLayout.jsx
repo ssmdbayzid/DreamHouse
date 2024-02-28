@@ -8,7 +8,7 @@ const MainLayout = () => {
   
   return (
     <div>
-        <Header setSelectedPage={setSelectedPage} selectedPage={selectedPage} />  
+        {/* <Header setSelectedPage={setSelectedPage} selectedPage={selectedPage} />   */}
         <div className='flex-1'>
            <Outlet />       
           </div>     

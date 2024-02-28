@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        primaryColor: "#009688",
+        headingColor: "#181A1E"
+      }
+    },
     // colors: {
     //   primary: 'var(--color-primary) / <alpha-value>',
     // }
