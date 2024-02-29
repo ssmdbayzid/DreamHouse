@@ -8,7 +8,8 @@ export default {
     extend: {
       colors:{
         primaryColor: "#009688",
-        headingColor: "#181A1E"
+        headingColor: "#181A1E",
+        accent: "#e2e8f0"
       }
     },
     // colors: {

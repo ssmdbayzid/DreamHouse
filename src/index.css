@@ -6,7 +6,7 @@
 
 @layer base {
   .section {
-    @apply py-[35px];
+    @apply py-[75px];
   }
 }
 
@@ -15,7 +15,7 @@
     @apply mt-[38px] rounded-full bg-primaryColor px-[35px] py-[15px] font-[600] text-white;
   }
   .container {
-    @apply mx-auto w-[1440px] max-w-full px-12;
+    @apply mx-auto w-[1440px] max-w-full px-4 md:px-12;
   }
   .heading {
     @apply text-[44px] text-headingColor leading-[54px] font-[700];
@@ -31,7 +31,8 @@
   }
 
   .section {
-    margin-top: 35px;
+    padding-top: 35px;
+    padding-bottom: 35px;
   }
 }
 

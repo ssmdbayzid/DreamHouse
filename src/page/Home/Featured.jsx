@@ -139,17 +139,18 @@ const propertyData = [
 
 const Featured = () => {
   return (
-    <section className='section bg-slate-200'>
-    <div className="max-w-[1170px] mx-auto my-20 lg:px-0 px-4 ">      
+    <section className='section bg-white'>
+    <div className="container ">      
     <p className='text-primaryColor text-center'>Our Featured Properties For Sale and Rent</p>
       <p className='heading text-center '>Properties For Sale & Rent</p>      
       <span className='flex w-28 mt-5 mb-10 mx-auto'>
       <hr className='h-2 bg-black w-1/2' /> <hr className='h-2  bg-primaryColor w-1/2'/>
       </span> 
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 grid-8">
 
       {propertyData && propertyData.map((item, index)=>
-      <div key={index} className='bg-slate-100 my-5 md:my-0'>   
+      <div key={index} className='bg-slate-100 my-5 md:my-0 hover:shadow-2xl '>   
        <div className="relative h-72">
          <img src="https://homepress.stylemixthemes.com/main/wp-content/uploads/sites/3/2021/03/alberto-castillo-q-mx4mSkK9zeo-unsplash-min-min-760x510.jpg" alt="" className='object-cover h-full w-full' />
 
@@ -170,7 +171,7 @@ const Featured = () => {
          <div className="px-3 pb-3 ">
              {/* --------- Product Content ---------- */}
          <div className="">
-             <p className=" font-bold text-xl mt-3">{item.title}</p>
+             <p className="whitespace-nowrap overflow-hidden text-ellipsis font-bold text-xl mt-3">{item.title}</p>
              <p className="text-primaryColor py-3 font-semibold">{item.location}</p>
              <p className="text-md text-slate-500 text-justify mt-auto">{item.description}</p>
              {/* <p className="text-md font-semibold">{item.title}</p> */}
