@@ -19,7 +19,7 @@ const WhyChooseUs = () => {
           <hr className='h-2 bg-black w-1/2' /> <hr className='h-2  bg-primaryColor w-1/2'/>
           </span> 
           </div>
-            <div className="grid grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div className='bg-white px-8 pt-10'>
                 <BsHouses className='text-8xl text-center inline-block w-full  text-primaryColor' />
                 <h3 className='text-lg text my-5 text-center text-headingColor font-bold'>Wide Range Of Properties</h3>
