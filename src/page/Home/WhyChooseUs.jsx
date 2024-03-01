@@ -12,6 +12,13 @@ const WhyChooseUs = () => {
   return (
     <section className='section bg-accent'>
         <div className="container">
+          <div className='md:w-[500px] mx-auto'>
+          <p className='text-primaryColor text-center'>Ehhancing the human experience</p>
+          <p className='heading text-center '>Why Choose Us</p>      
+          <span className='flex w-28 mt-5 mb-10 mx-auto'>
+          <hr className='h-2 bg-black w-1/2' /> <hr className='h-2  bg-primaryColor w-1/2'/>
+          </span> 
+          </div>
             <div className="grid grid-cols-4 gap-5">
                 <div className='bg-white px-8 pt-10'>
                 <BsHouses className='text-8xl text-center inline-block w-full  text-primaryColor' />

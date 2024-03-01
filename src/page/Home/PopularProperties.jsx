@@ -137,12 +137,12 @@ const propertyData = [
 
 
 
-const Featured = () => {
+const PopularProperties = () => {
   return (
     <section className='section bg-white'>
     <div className="container ">      
-    <p className='text-primaryColor text-center'>Our Featured Properties For Sale and Rent</p>
-      <p className='heading text-center '>Properties For Sale & Rent</p>      
+    <p className='text-primaryColor text-center'>Our Popular Properties For Sale and Rent</p>
+      <p className='heading text-center '>Popular Properties</p>      
       <span className='flex w-28 mt-5 mb-10 mx-auto'>
       <hr className='h-2 bg-black w-1/2' /> <hr className='h-2  bg-primaryColor w-1/2'/>
       </span> 
@@ -203,4 +203,4 @@ const Featured = () => {
   )
 }
 
-export default Featured
+export default PopularProperties
