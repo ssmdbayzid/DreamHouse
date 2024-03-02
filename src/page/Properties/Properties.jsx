@@ -36,7 +36,6 @@ const Properties = () => {
         )
     }
 
-    console.log(filteredItems)
 
     return (
     <section className='section '>

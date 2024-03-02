@@ -4,24 +4,25 @@ const FilterMenu = ({handleChange}) => {
   return (
     <div className='bg-white px-3'>
 <div className="mt-10">
-  <label htmlFor="">Search Tarm</label>
-  <input
-    type="text"
-    className=" text-lg border"
-  />
-  <br />
+     <h1 className='text-xl text-center font-bold'>Filter Properties</h1>
   <div className=" py-10">
     <p>Type :</p>
     <div className="flex gap-5 mb-3 items-center pl-2">
-      <input type="checkbox" name="" id="" className="" />
+      <input
+      onChange={handleChange}
+      type="checkbox" name="" id="" className="" />
       <p className="pl-4">Rent</p>
     </div>
     <div className="flex gap-5 mb-3 items-center pl-2">
-      <input type="checkbox" name="" id="" className="" />
+      <input
+      onChange={handleChange}      
+      type="checkbox" name="" id="" className="" />
       <p className="pl-4">Sale</p>
     </div>
     <div className="flex gap-5 mb-3 items-center pl-2">
-      <input type="checkbox" name="" id="" className="" />
+      <input
+      onChange={handleChange}      
+      type="checkbox" name="" id="" className="" />
       <p className="pl-4">Rent &amp; Sale</p>
     </div>
   </div>
