@@ -36,7 +36,7 @@ const PopularProperties = () => {
 
          <div class="absolute top-0 flex justify-between w-full">
           <p class="bg-primaryColor/50  text-white text-md px-3 py-2 rounded-br-md">Hot Offer</p>
-          <p class="bg-primaryColor/50  text-white text-md px-3 py-2 rounded-bl-md">For Sale</p>
+          <p class="bg-primaryColor/50  text-white text-md px-3 py-2 rounded-bl-md">{item.status}</p>
         </div>
         <div className='absolute bottom-0 w-full'>
         <p class="w-1/3 text-white ml-auto py-3  text-center rounded-tl-xl blur-[0.5px] bg-black/70">${item.rent} <span class="text-red-600">/ {item.postfix}</span></p>

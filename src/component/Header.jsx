@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import logo from '../assets/logo.png'
+import logo2 from '../assets/logo 2.png'
 import { IoMenu } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import Menu from './Menu';
 import { MdOutlineFileDownload } from "react-icons/md";
+import { NavLink } from 'react-router-dom';
 
 const Link = ({page, selectedPage, setSelectedPage}) => {
   const lowerCasePage = page.toLowerCase();
@@ -18,31 +20,54 @@ const Link = ({page, selectedPage, setSelectedPage}) => {
 }
 
 
+const navLinks = [
+  {
+      path: '/home',
+      display: "Home",
+  },
+  {
+      path: '/properties',
+      display: "Properties",
+  },
+  {
+      path: '/contact',
+      display: "Contact",
+  }, 
+]
 
 const Header = ({setSelectedPage, selectedPage}) => {
   const [scroll, setScroll] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false)
+  const [user, setUser] = useState(false)
+
+
   // change nav color when scroll
   const onChange = () => {
-    if (window.scrollY >= 90) {
+    if (window.scrollY >= 100) {
       setScroll(true);
     } else {
       setScroll(false);
     }
   };
   window.addEventListener('scroll', onChange);
+  
+  let path;
+  useEffect(()=>{
+    path = location.pathname.split("/")[1]
+  },[path])
+  
+  // path && path !== "home"
   return (
     
     <div
-      className={`  fixed top-0 left-0 z-[999] w-full transform duration-200 flex items-center md:px-0 px-2 md:py-2 py-3 `}
+      className={`${scroll  ? "fixed shadow-lg" : "relative"} z-[9999]  top-0 bg-gradient-to-b from-primaryColor via-slate-200 to-white  w-full transform duration-200 flex items-center  `}
     >
-      <div className=" max-w-[1170px]  w-full flex flex-wrap items-center justify-between mx-auto">
+      <div className=" max-w-[1170px] md:px-0 px-4 md:py-4 py-3 w-full flex flex-wrap items-center justify-between mx-auto">
         <p className="flex items-center space-x-3 rtl:space-x-reverse">          
           <a href='/'
            className="flex items-center self-center text-2xl font-semibold whitespace-nowrap ">
-            <p className="text-4xl h-12 font-bold mr-2 text-white ps-5 md:ps-0">
-              Bayzid
-            </p>
+            <img src={logo2} alt="" className='w-[70px]' />
+           
           </a>
         </p>
         {/* -------- Menu button ---------- */}
@@ -52,8 +77,26 @@ const Header = ({setSelectedPage, selectedPage}) => {
             <IoMenu className='text-3xl' />
             </div>
 
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex items-center flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <div className="hidden w-full md:w-auto md:flex items-center gap-5 " id="navbar-default">
+          <ul className="font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse "> 
+          {
+            navLinks && navLinks.map(link=> 
+            <NavLink key={link.display} to={link.path}
+            className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-bold"
+            : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}
+            >{link.display}</NavLink>
+              )
+          }
+          </ul>
+
+          <ul className='font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
+          <NavLink to="/log-in" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-bold"
+            : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}>Log In</NavLink>
+          <NavLink  to="/sign-up" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-bold"
+            : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"} >Sign Up</NavLink>
+          </ul>
+         
+          {/* <ul className="font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse bg-transparent">
             <li>
             <Link page="Home"
             className="text-primary"
@@ -61,26 +104,27 @@ const Header = ({setSelectedPage, selectedPage}) => {
             selectedPage={selectedPage}
             />
             </li>
-            <li>
-            <Link page="About"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>
-            <li>
-            <Link page="Skills"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>
-            <li>
-            <Link page="Projects"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>
+           
             <li>
             <Link page="Contact"
+            setSelectedPage={setSelectedPage}
+            selectedPage={selectedPage}
+            />
+            </li>
+            <li>
+            <Link page="Properties"
+            setSelectedPage={setSelectedPage}
+            selectedPage={selectedPage}
+            />
+            </li>
+           {user && <li>
+            <Link page="Log In"
+            setSelectedPage={setSelectedPage}
+            selectedPage={selectedPage}
+            />
+            </li>}
+            <li>
+            <Link page="Sign Up"
             setSelectedPage={setSelectedPage}
             selectedPage={selectedPage}
             />
@@ -91,18 +135,23 @@ const Header = ({setSelectedPage, selectedPage}) => {
         Resume <MdOutlineFileDownload className='text-xl' />
         </a>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
-      <div className={`md:hidden absolute  left-0 top-0 h-screen bg-slate-700 w-96 overflow-y-auto transition-transform transform ${menuToggle ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-300`}>
+      <div className={`md:hidden  absolute top-0 h-screen bg-slate-200 w-4/5 overflow-y-auto transition-transform transform ${menuToggle ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-300`}>
   <div className="flex justify-between items-center">
     {/* -------- Logo ------- */}
   <p className="flex items-center space-x-3 rtl:space-x-reverse">          
           <a href='/'
-           className="flex items-center self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            <p className="text-4xl h-12 font-bold mr-2 bg-gradient-to-r from-indigo-600  to-pink-200 text-transparent bg-clip-text ps-5 md:ps-0">
+           className="flex items-center self-center text-2xl font-semibold whitespace-nowrap ">
+            {/* <p className="text-4xl h-12 font-bold mr-2 bg-gradient-to-r from-indigo-600  to-pink-200 text-transparent bg-clip-text ps-5 md:ps-0">
               Bayzid 
-            </p>
+            </p> */}
+             <a href='/'
+           className="flex items-center ml-4 self-center text-3xl font-semibold whitespace-nowrap ">
+            <img src={logo2} alt="" className='w-[50px]' />
+            <p className='text-primaryColor pl-2'   > Dream House</p>
+          </a>
           </a>
         </p>
 

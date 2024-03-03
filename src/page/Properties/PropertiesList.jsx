@@ -17,16 +17,16 @@ const PropertiesList = ({properties}) => {
         <div className="relative h-72">
         <img src="https://homepress.stylemixthemes.com/main/wp-content/uploads/sites/3/2021/03/alberto-castillo-q-mx4mSkK9zeo-unsplash-min-min-760x510.jpg" alt="" className='object-cover h-full w-full' />
 
-        <div class="absolute top-0 flex justify-between w-full">
-            <p class="bg-primaryColor/50  text-white text-md px-3 py-2 rounded-br-md">Hot Offer</p>
-            <p class="bg-primaryColor/50  text-white text-md px-3 py-2 rounded-bl-md">For Sale</p>
+        <div className="absolute top-0 flex justify-between w-full">
+            <p className="bg-primaryColor/50  text-white text-md px-3 py-2 rounded-br-md">Hot Offer</p>
+            <p className="bg-primaryColor/50  text-white text-md px-3 py-2 rounded-bl-md">{item.status}</p>
         </div>
         <div className='absolute bottom-0 w-full'>
-        <p class="w-1/3 text-white ml-auto py-3  text-center rounded-tl-xl blur-[0.5px] bg-black/70">${item.rent} <span class="text-red-600">/ {item.postfix}</span></p>
-        <div class="flex justify-between bg-black/50 blur-[0.3px] px-3 py-2 text-white">
-            <span className='flex gap-2 items-center text-sm'><BsFillTagFill className='text-primaryColor'/> {item.propertyType}</span>
-            <span className='flex gap-2 items-center text-sm'> <FaUserAlt className='text-primaryColor'/> {item.propertyAgent}</span>
-            <span className='flex gap-2 items-center text-sm'> <FaRegCalendarAlt className='text-primaryColor'/>{item.propertyDate}</span>
+        <p className="w-1/3 text-white ml-auto py-3  text-center rounded-tl-xl blur-[0.5px] bg-black/70">${item.rent} <span className="text-red-600">/ {item.postfix}</span></p>
+        <div className="flex justify-between bg-black/50 blur-[0.3px] px-3 py-2 text-white">
+            <span className='flex gap-1 items-center text-sm'><BsFillTagFill className='text-primaryColor'/> {item.propertyType}</span>
+            <span className='flex gap-1 items-center whitespace-nowrap overflow-hidden text-ellipsis text-sm'> <FaUserAlt className='text-primaryColor'/> {item.propertyAgent}</span>
+            <span className='whitespace-nowrap  flex gap-1 items-center text-sm'> <FaRegCalendarAlt className='text-primaryColor'/>{item.propertyDate}</span>
             </div>
         </div>
         

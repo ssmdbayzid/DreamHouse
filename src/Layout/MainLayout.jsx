@@ -3,12 +3,12 @@ import Header from '../component/Header'
 import Footer from '../component/Footer'
 import { Outlet } from 'react-router-dom'
 
+
 const MainLayout = () => {
-  const [selectedPage, setSelectedPage] = useState("home")
   
   return (
     <div>
-        {/* <Header setSelectedPage={setSelectedPage} selectedPage={selectedPage} />   */}
+        <Header  />          
         <div className='flex-1'>
            <Outlet />       
           </div>     
