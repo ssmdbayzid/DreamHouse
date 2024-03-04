@@ -31,8 +31,8 @@ const SignUp = () => {
       className="mb-10 w-full border-b border-blue-300 py-2 text-slate-400"
       placeholder="Password"
     />
-    <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-white py-2 text-xl  text-white font-bold">
-      Log In
+    <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-slate-200 py-2 text-xl  text-white font-bold">
+      Join
     </button>
   </form>
   <div className="my-3 flex items-center justify-between gap-3">

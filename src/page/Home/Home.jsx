@@ -7,6 +7,8 @@ import Testimonial from './Testimonial'
 import WhyChooseUs from './WhyChooseUs'
 import AboutUs from './AboutUs'
 import Features from './Features'
+import City from './City'
+import Appartment from './Appartment'
 
 const Home = () => {
   return (
@@ -16,6 +18,8 @@ const Home = () => {
        <WhyChooseUs />
        <PopularProperties />
        <Features />
+       <Appartment />
+       <City />
        <AboutUs />
        <Testimonial />
     </div>

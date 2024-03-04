@@ -10,7 +10,7 @@ const AboutUs = () => {
             <div className='flex w-28 mt-3 mb-10 mx-auto md:mx-0 justify-center md:justify-start'>
             <hr className='h-2 bg-black w-1/2' /> <hr className='h-2  bg-primaryColor w-1/2'/>
             </div> 
-            <h2 className='heading'>We find your dearm house</h2>
+            <h2 className='md:text-4xl text-3xl'>We find your dearm house</h2>
             </div>
 
             <p className='text-para text-justify'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem minima ex libero provident aperiam nobis, nihil, placeat asperiores nulla officiis, praesentium repellat cupiditate sapiente. Ducimus sequi omnis veniam suscipit ipsa.</p>

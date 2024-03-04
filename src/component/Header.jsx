@@ -92,8 +92,8 @@ const Header = ({setSelectedPage, selectedPage}) => {
           <ul className='font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
           <NavLink to="/log-in" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-bold"
             : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}>Log In</NavLink>
-          <NavLink  to="/sign-up" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-bold"
-            : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"} >Sign Up</NavLink>
+          <NavLink  to="/sign-up" className={navClass => navClass.isActive ? "px-4 py-1.5 bg-primaryColor text-white transition duration-500 cursor-pointer font-bold"
+            : " hover:text-slate-200 transition duration-500 cursor-pointer px-4 py-1.5 bg-primaryColor text-white"} >Join</NavLink>
           </ul>
          
           {/* <ul className="font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse bg-transparent">
