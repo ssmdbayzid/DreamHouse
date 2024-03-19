@@ -4,22 +4,29 @@ import PropertiesList from './PropertiesList'
 import FilterMenu from './FilterMenu'
 import SearchBar from './SearchBar'
 import MobileFilterMenu from './MobileFilterMenu'
-
-
-
+import getAllProperties from '../../hooks/getAllProperties'
+import { useGetAllPropertiesQuery } from '../../app/features/propertiesApiSlice'
+import Loader from '../../hooks/Loader'
+import { useSearchParams } from 'react-router-dom'
 
 const Properties = () => {
-  const [properties, setProperties] = useState(null)
-  const [openFilterMenu, setOpenFilterMenu] = useState(false)
   
+  const [openFilterMenu, setOpenFilterMenu] = useState(false)
   const [query, setQuery] = useState("")
   const [selectedType, setSelectedType] = useState("")
+  
+  const [propertiesData, setPropertiesData] = useState(null)
+  
+  const {properties, loading} = getAllProperties()
+
 
   useEffect(()=>{
-    if(propertyData){
-        setProperties(propertyData)
+    if(properties){
+      setPropertiesData(properties)
     }
-  },[])
+  },[properties])
+  
+
 
   const handleChange = event => {    
     if(event.target.checked === true && event.target.value){
@@ -33,15 +40,15 @@ const Properties = () => {
     // ------------- Filter System --------------
 
     let filteredItems;
-    if(properties){
-        filteredItems = properties.filter(
+    if(propertiesData){
+        filteredItems = propertiesData?.filter(
         property => property.title.toLowerCase().includes(query.toLowerCase()) 
         || property.location.toLowerCase().includes(query.toLowerCase())
         )
     }
 
-    const  filterProperties = (properties, selected, query) =>{
-      let filteredProperties = properties;
+    const  filterProperties = (propertiesData, selected, query) =>{
+      let filteredProperties = propertiesData;
 
       if(query){
         filteredProperties = filteredItems
@@ -57,28 +64,31 @@ const Properties = () => {
       return filteredProperties
     }
 
-    const result = filterProperties(properties, selectedType, query)
-
-    
+    const result = filterProperties(propertiesData, selectedType, query)
+   
     
     // --------- Sort By H2L or L2H rent--------
 
     const onChangeSort = (e) =>{      
       if(e.target.value === "H2L"){
-        const sorted = [...properties].sort((a,b)=> b.rent - a.rent)
-        setProperties(sorted)
+        const sorted = [...propertiesData].sort((a,b)=> b.rent - a.rent)
+        setPropertiesData(sorted)
       }else if(e.target.value === "L2H"){
-        const sorted = [...properties].sort((a,b)=> a.rent - b.rent)
-        setProperties(sorted)
+        const sorted = [...propertiesData].sort((a,b)=> a.rent - b.rent)
+        setPropertiesData(sorted)
       }else if(e.target.value === ""){       
-        if(propertyData)  setProperties(propertyData)
+        if(propertyData)  setPropertiesData(propertyData)
       }     
     }
 
+    
      
-
+    console.log(propertiesData)
     return (
     <section className='section '>
+       {loading ? <>       
+       <Loader />
+       </>  :
         <div className="container">
           {openFilterMenu &&  <MobileFilterMenu 
           handleChange={handleChange} onChangeSort={onChangeSort}          
@@ -99,19 +109,19 @@ const Properties = () => {
           </button>
             </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-4 lg:grid-cols-5">
-        <div className="hidden md:block md:col-span-2 lg:col-span-1 h-screen">
+        <div className="hidden sticky md:block md:col-span-2 lg:col-span-1 h-screen">
         <form className=' space-y-4 border border-gray-200 pb-6 text-sm font-medium text-gray-900 px-5'>
         <FilterMenu handleChange={handleChange} onChangeSort={onChangeSort}
        />
         </form>
         </div>
         <div className="md:col-span-3 lg:col-span-4 ">
-        {properties && 
+        {propertiesData && 
         <PropertiesList  properties={result} />}
         </div>
        
         </div>
-        </div>
+        </div>}
     </section>
   )
 }

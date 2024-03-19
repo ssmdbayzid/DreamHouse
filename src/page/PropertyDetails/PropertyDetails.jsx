@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsFillTagFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -7,20 +7,49 @@ import { MdOutlineSoupKitchen } from "react-icons/md";
 import { PiGarage } from "react-icons/pi";
 import { PiGridNineLight } from "react-icons/pi";
 import { FaDollarSign } from "react-icons/fa";
+import { useParams } from 'react-router-dom';
+import { useGetPropertyQuery } from '../../app/features/propertiesApiSlice';
+import Loader from '../../hooks/Loader';
 
 
 const PropertyDetails = () => {
+  const {id} = useParams()
+  const [loading, setLoading] = useState(false);
+  const [property, setProperty] = useState(null)
+  const {data, isLoading} = useGetPropertyQuery(id)
+
+
+  
+
+  
+
+  useEffect(()=>{
+   
+    if(isLoading){
+      setLoading(true)
+    } if(data){
+      console.log(data?.data)
+      setProperty(data?.data)    
+      setLoading(false)
+    }
+},[data])
+  
+
+
   return (
     <section className='section'>
     <div className='container'>
-        
-  <div className="md:px-0 px-4 mb-5 flex items-center justify-between">
+    {
+      loading ? <Loader /> 
+      : 
+      <>
+    <div className="md:px-0 px-4 mb-5 flex items-center justify-between">
     <div className="">
-      <h1 className="text-2xl font-bold">Mountain View Retreat in Alpine</h1>
-      <p className="text-slate-400">222 Serenity Lane, Alpine, CA 91901</p>
+      <h1 className="text-2xl font-bold">{property?.title}</h1>
+      <p className="text-slate-400">{property?.location}</p>
     </div>
     <div className="">
-      <h1 className="text-2xl font-bold">$5000 / Week</h1>
+      <h1 className="text-2xl font-bold capitalize">${property?.rent} / {property?.postfix}</h1>
       <p className="text-right text-slate-400">Price</p>
     </div>
   </div>
@@ -49,43 +78,43 @@ const PropertyDetails = () => {
     <div className="w-full md:w-2/3 md:px-0 px-4">
       <h1 className="text-3xl font-semibold mb-4">Description</h1>
       <p className="text-justify">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt illo
+      {property?.description}  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt illo
         delectus voluptate libero nulla enim veritatis ex iusto sed, molestias a
         nobis blanditiis perspiciatis consectetur et veniam quia eaque
         provident.
       </p>
       <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5">
         <div className=''>
-          <p className="flex items-center gap-2 text-lg  mb-2"><BsFillTagFill /> Property Type</p>
-          <h3 className="text-xl font-bold pl-5">Villa</h3>
+          <p className="flex items-center text-slate-500 gap-2 text-md  mb-2"><BsFillTagFill /> Property Type</p>
+          <h3 className="text-md text-slate-600 font-bold pl-5 capitalize">{property?.propertyType}</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 text-lg mb-2'><FaUserAlt /> Agent</p>
-          <h3 className="text-xl font-bold pl-5">Aya Magdy</h3>
+          <p className='flex items-center gap-2 text-slate-500 text-md mb-2'><FaUserAlt /> Agent</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.propertyAgent}</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 text-lg mb-2'><FaRegCalendarAlt /> Listed</p>
-          <h3 className="text-xl font-bold pl-5">7 Years Ago</h3>
+          <p className='flex items-center gap-2 text-slate-500 text-md mb-2'><FaRegCalendarAlt /> Listed</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.propertyDate}</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 text-lg mb-2'><FaDollarSign /> Rent</p>
-          <h3 className="text-xl font-bold pl-5">410,000 / week</h3>
+          <p className='flex items-center gap-2 text-slate-500 text-md mb-2'><FaDollarSign /> Rent</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">${property?.rent} / {property?.postfix}</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 text-lg mb-2'><IoBedOutline /> Bed</p>
-          <h3 className="text-xl font-bold pl-5">2</h3>
+          <p className='flex items-center gap-2 text-slate-500 text-md mb-2'><IoBedOutline /> Bed</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.bed}</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 text-lg mb-2'><MdOutlineSoupKitchen /> Kitche</p>
-          <h3 className="text-xl font-bold pl-5">1</h3>
+          <p className='flex items-center gap-2 text-slate-500 text-md mb-2'><MdOutlineSoupKitchen /> Kitche</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.kitchen}</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 text-lg mb-2'><PiGarage /> Ware House</p>
-          <h3 className="text-xl font-bold pl-5">1</h3>
+          <p className='flex items-center gap-2 text-slate-500 text-md mb-2'><PiGarage /> Ware House</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">1</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 text-lg mb-2'><PiGridNineLight /> Area</p>
-          <h3 className="text-xl font-bold pl-5">6000 SqFt</h3>
+          <p className='flex items-center gap-2 text-slate-500 text-md mb-2'><PiGridNineLight /> Area</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.sqFt} SqFt</h3>
         </div>
       </div>
     </div>
@@ -121,6 +150,9 @@ const PropertyDetails = () => {
       </form>
     </div>
   </div>
+      </>
+    }  
+  
     </div>
     </section>
   )

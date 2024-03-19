@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const SearchBar = ({setQuery}) => {
   return (
     <div className="mx-auto w-full md:w-1/3 "> 
@@ -13,8 +14,8 @@ const SearchBar = ({setQuery}) => {
       name="search"
       onChange={(e)=>setQuery(e.target.value)}
       className=" rounded-md py-2 pl-8 w-full md:pl-12 md:pr-40 md:text-lg text-sm  outline-none focus:ring-2" placeholder="Search " />
-      <button type="submit" className=" absolute py-2 right-0 mr-1 inline-flex  items-center justify-center rounded-lg bg-gray-900 text-xs md:text-lg px-2 md:px-6 font-medium text-white focus:ring-4 hover:bg-gray-700">Search</button>
-    </form>
+     
+    </form>    
   </div>
   )
 }

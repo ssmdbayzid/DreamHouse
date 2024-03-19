@@ -2,10 +2,11 @@ import React from 'react'
 
 const City = () => {
   return (
-    <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
-  <grid className="grid md:grid-cols-4 items-center gap-12 px-4">
+    <section className="section bg-accent">
+      <div className='container'>
+  <grid className=" grid md:grid-cols-4 items-center gap-6 px-4">
     <div className="">
-    <div className='text-center md:text-left'>
+    <div className='text-center md:text-left '>
             <h1 className='heading'>Resident</h1> 
             <div className='flex w-28 mt-3 mb-10 mx-auto md:mx-0 justify-center md:justify-start'>
             <hr className='h-1 bg-black w-1/2' /> <hr className='h-1  bg-primaryColor w-1/2'/>
@@ -75,7 +76,8 @@ const City = () => {
       </div>
     </div>
   </grid>
-</div>
+  </div>
+</section>
 
   )
 }

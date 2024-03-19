@@ -5,11 +5,11 @@ const MobileFilterMenu = ({setOpenFilterMenu, openFilterMenu, handleChange, onCh
     <div>
          <div className="relative  z-40 " role="dialog" aria-modal="true">
       
-      <div className="fixed inset-0 z-[99] bg-black bg-opacity-25"></div>
+      <div  className="fixed inset-0 z-[999] bg-black/60"></div>
 
-      <div className="fixed inset-0 z-[999]  flex">
+      <div onClick={()=>setOpenFilterMenu(!openFilterMenu)}   className="fixed z-[999]  inset-0   flex">
      
-        <div className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+        <div className="relative  ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
           <div className="flex items-center justify-between px-4">
             <h2 className="text-lg font-medium text-gray-900">Filters</h2>
             <button

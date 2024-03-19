@@ -6,6 +6,7 @@ import { IoBedOutline } from "react-icons/io5";
 import { MdOutlineSoupKitchen } from "react-icons/md";
 import { PiGarage } from "react-icons/pi";
 import { PiGridNineLight } from "react-icons/pi";
+import { Link } from 'react-router-dom';
 
 const PropertiesList = ({properties}) => {
 
@@ -13,7 +14,7 @@ const PropertiesList = ({properties}) => {
     <div className=''>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 grid-8">
        {properties && properties.map((item, index)=>
-        <div key={index} className='relative pb-8 bg-slate-100 my-5 md:my-0 hover:shadow-2xl '>   
+        <Link to={`/property/${item._id}`} key={index} className='relative pb-8 bg-slate-100 my-5 md:my-0 hover:shadow-2xl '>   
         <div className="relative h-72">
         <img src="https://homepress.stylemixthemes.com/main/wp-content/uploads/sites/3/2021/03/alberto-castillo-q-mx4mSkK9zeo-unsplash-min-min-760x510.jpg" alt="" className='object-cover h-full w-full' />
 
@@ -55,7 +56,7 @@ const PropertiesList = ({properties}) => {
             </div>   
         </div>             
         </div>          
-        </div>)}
+        </Link>)}
         </div>
     </div>
   )

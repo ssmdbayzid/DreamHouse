@@ -60,7 +60,7 @@ const Header = ({setSelectedPage, selectedPage}) => {
   return (
     
     <div
-      className={`${scroll  ? "fixed shadow-lg" : "relative"} z-[9999]  top-0 bg-gradient-to-b from-primaryColor via-slate-200 to-white  w-full transform duration-200 flex items-center  `}
+      className={`${scroll  ? "fixed shadow-lg" : "relative"} z-[99]  top-0 bg-gradient-to-b from-primaryColor via-slate-200 to-white  w-full transform duration-200 flex items-center  `}
     >
       <div className=" max-w-[1170px] md:px-0 px-4 md:py-4 py-3 w-full flex flex-wrap items-center justify-between mx-auto">
         <p className="flex items-center space-x-3 rtl:space-x-reverse">          
@@ -82,7 +82,7 @@ const Header = ({setSelectedPage, selectedPage}) => {
           {
             navLinks && navLinks.map(link=> 
             <NavLink key={link.display} to={link.path}
-            className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-bold"
+            className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-semibold"
             : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}
             >{link.display}</NavLink>
               )
@@ -90,9 +90,9 @@ const Header = ({setSelectedPage, selectedPage}) => {
           </ul>
 
           <ul className='font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
-          <NavLink to="/log-in" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-bold"
+          <NavLink to="/log-in" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-semibold"
             : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}>Log In</NavLink>
-          <NavLink  to="/sign-up" className={navClass => navClass.isActive ? "px-4 py-1.5 bg-primaryColor text-white transition duration-500 cursor-pointer font-bold"
+          <NavLink  to="/sign-up" className={navClass => navClass.isActive ? "px-4 py-1.5 bg-primaryColor text-white transition duration-500 cursor-pointer font-semibold"
             : " hover:text-slate-200 transition duration-500 cursor-pointer px-4 py-1.5 bg-primaryColor text-white"} >Join</NavLink>
           </ul>
          
