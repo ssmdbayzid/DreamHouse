@@ -7,6 +7,7 @@ import PropertyDetails from "../page/PropertyDetails/PropertyDetails";
 import Properties from "../page/Properties/Properties";
 import LogIn from "../page/Auth/LogIn";
 import SignUp from "../page/Auth/SignUp";
+import About from "../page/About";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "/home",
                 element: <Home />
+            },         
+            {
+                path: "/about",
+                element: <About />
             },         
             {
                 path: "/properties",

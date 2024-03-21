@@ -28,7 +28,7 @@ const Testimonial = () => {
       }, []);
     
   return (
-    <section className='section bg-accent'>
+    <section className='section bg-white'>
     <div className='container'>
         <div className="lg-[470px] mx-auto">
         <p className='text-primaryColor text-center'>We collect reviews from our customers.</p>
@@ -69,7 +69,7 @@ const Testimonial = () => {
         }}
       >
         <SwiperSlide className={style.swiper}>
-        <div className="relative w-full bg-white px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
+        <div className="relative w-full bg-slate-200 px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
     
     <p className="text-para text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam</p>
     <div className="flex items-center mt-10">
@@ -86,7 +86,7 @@ const Testimonial = () => {
         </SwiperSlide>
        
         <SwiperSlide className={style.swiper}>
-        <div className="relative w-full bg-white px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
+        <div className="relative w-full bg-slate-200 px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
   
   <p className="text-para text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam</p>
   <div className="flex items-center mt-10">
@@ -103,7 +103,7 @@ const Testimonial = () => {
         </SwiperSlide>
 
         <SwiperSlide className={style.swiper}>
-        <div className="relative w-full bg-white px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
+        <div className="relative w-full bg-slate-200 px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
   
   <p className="text-para text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam</p>
   <div className="flex items-center mt-10">
@@ -120,7 +120,7 @@ const Testimonial = () => {
         </SwiperSlide>
 
         <SwiperSlide className={style.swiper}>
-        <div className="relative w-full bg-white px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
+        <div className="relative w-full bg-slate-200 px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
   
   <p className="text-para text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam</p>
   <div className="flex items-center mt-10">
@@ -137,7 +137,7 @@ const Testimonial = () => {
         </SwiperSlide>
 
         <SwiperSlide className={style.swiper}>
-        <div className="relative w-full bg-white px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
+        <div className="relative w-full bg-slate-200 px-[53px] pb-[55px] pt-[44px] after:absolute after:bottom-14 after:right-10 after:h-14 after:w-20 after:bg-[url('https://code-theme.com/html/findhouses/images/icons/quoe.png')] after:bg-cover after:bg-no-repeat after:bg-center">
   
   <p className="text-para text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam</p>
   <div className="flex items-center mt-10">

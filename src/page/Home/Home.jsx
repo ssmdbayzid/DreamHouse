@@ -19,8 +19,7 @@ const Home = () => {
        <PopularProperties />
        <Features />
        <Appartment />
-       <City />
-       <AboutUs />
+       <City />       
        <Testimonial />
     </div>
   )

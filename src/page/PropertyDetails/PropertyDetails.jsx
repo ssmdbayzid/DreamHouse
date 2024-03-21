@@ -10,6 +10,7 @@ import { FaDollarSign } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
 import { useGetPropertyQuery } from '../../app/features/propertiesApiSlice';
 import Loader from '../../hooks/Loader';
+import Map from '../../component/Map';
 
 
 const PropertyDetails = () => {
@@ -119,6 +120,7 @@ const PropertyDetails = () => {
       </div>
     </div>
     <div className="w-full py-5 border md:w-1/3 md:px-0 px-4">
+          
       <h3 className="text-center text-3xl mb-3 font-bold text-blue-500">
         Schedule A Tour
       </h3>
@@ -152,7 +154,7 @@ const PropertyDetails = () => {
   </div>
       </>
     }  
-  
+    {/* <Map location="sasdfsdf" city="city" country="country" /> */}
     </div>
     </section>
   )

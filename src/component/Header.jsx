@@ -26,6 +26,10 @@ const navLinks = [
       display: "Home",
   },
   {
+      path: '/about',
+      display: "About",
+  },
+  {
       path: '/properties',
       display: "Properties",
   },
