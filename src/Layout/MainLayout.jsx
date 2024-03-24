@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <div>
         <Header  />          
-        <div className='h-[calc(100vh-11vh)]'>
+        <div className='flex-1'>
            <Outlet />       
           </div>     
         <Footer />
