@@ -37,6 +37,10 @@ const navLinks = [
       path: '/contact',
       display: "Contact",
   }, 
+  {
+      path: '/dashboard',
+      display: "Dashboard",
+  }, 
 ]
 
 const Header = ({setSelectedPage, selectedPage}) => {

@@ -8,6 +8,14 @@ import Properties from "../page/Properties/Properties";
 import LogIn from "../page/Auth/LogIn";
 import SignUp from "../page/Auth/SignUp";
 import About from "../page/About";
+import Dashboard from "../page/Dashboard/Dashboard";
+import DashBoardIndex from "../page/Dashboard/DashboardIndex";
+import AddListing from "../page/Dashboard/AddListing";
+import Profile from "../page/Dashboard/Profile";
+import MyListing from "../page/Dashboard/MyListing";
+
+
+
 
 const router = createBrowserRouter([
     {
@@ -33,7 +41,30 @@ const router = createBrowserRouter([
             {
                 path: "/property/:id",
                 element: <PropertyDetails />
-            },         
+            },   
+            {
+                path: "/dashboard",
+                element: <Dashboard />,
+               
+                children: [
+                   {
+                    index:true,
+                    element: <DashBoardIndex />
+                   },
+                    {
+                        path: "add-listing",
+                        element: <AddListing />
+                    },
+                    {
+                        path: "profile",
+                        element: <Profile />
+                    },
+                    {
+                        path: "my-listing",
+                        element: <MyListing />
+                    },
+                ]
+            },          
             {
                 path: "/log-in",
                 element: <LogIn />

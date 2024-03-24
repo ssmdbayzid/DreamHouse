@@ -1,8 +1,28 @@
 import React from 'react'
 import logo from '../../assets/logo 2.png'
+import { useFormik } from 'formik'
+import { loginSchema } from '../../schema'
+
+
+
+const initialValues = {
+  email: "",
+  password: ""
+}
+
 const LogIn = () => {
+
+const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
+  initialValues: initialValues,
+  validationSchema: loginSchema,
+  onSubmit: (values) => {
+    console.log("🚀 ~ LogIn ~ value:", values)    
+  }
+})
+
+
   return (
-    <section className='section md:px-0 px-5 flex items-center justify-center h-[80vh] '>
+    <section className='section md:px-0 px-5 flex items-center justify-center  '>
       <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white px-5 py-3 shadow-xl">
   <div className="h-10 w-14 my-2 mx-auto overflow-hidden ">
     <img
@@ -11,20 +31,32 @@ const LogIn = () => {
       alt=""
     />
   </div>
-  <h2 className=" text-xl text-center font-bold">
+  <h2 className=" text-xl text-center font-bold mb-4">
     Hello! Welcome <span>Back</span>
   </h2>
-  <form action="">
+  <form onSubmit={handleSubmit}>
     <input
       type="email"
-      className="mb-5 w-full border-b border-blue-300 pb-2 text-slate-400"
+      className="mb-5 w-full border-b border-blue-300 py-2 text-slate-700 px-2"
       placeholder="Email"
+      autoComplete="off"
+      name="email"
+      value={values.email}
+      onChange={handleChange}
+      onBlur={handleBlur}
     />
+     {errors.email && touched.email && <p className='text-red-600 text-sm pb-1'>{errors.email}</p>}
     <input
       type="password"
-      className="mb-10 w-full border-b border-blue-300 py-2 text-slate-400"
+      className="mb-5 w-full border-b border-blue-300 py-2 text-slate-700 px-2"
       placeholder="Password"
+      autoComplete="off"
+      name='password'
+      value={values.password}
+      onChange={handleChange}
+      onBlur={handleBlur}
     />
+      {errors.password && touched.password && <p className='text-red-600 text-sm pb-1'>{errors.password}</p>}
     <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-white py-2 text-xl  text-white font-bold">
       Log In
     </button>
