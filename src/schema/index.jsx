@@ -33,5 +33,5 @@ export const propertySchema = Yup.object({
     post_code: Yup.number().required('Post code is required'),
     police_station: Yup.string().required('Polcie Station is required'),
     country: Yup.string().required('Country is required'),
-    features: Yup.array().of(Yup.string()).min(6, "Minimum 6 featured is required").required("Minimum 6 featured is required")
+    features: Yup.array().of(Yup.string()).min(6, "Minimum 6 featured is required").required("Minimum 6 featured is required"),    
   });

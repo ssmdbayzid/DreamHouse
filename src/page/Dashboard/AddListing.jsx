@@ -3,7 +3,8 @@ import { useFormik } from "formik"
 import {propertySchema} from "../../schema"
 import ImageUpload from '../../utility/ImageUpload'
 
-
+import {uploadToCludinary} from '../../hooks/uploadToCludinary'
+import { useAddPropertyMutation } from '../../app/features/propertiesApiSlice'
 const checkboxData = 
 [
   {
@@ -83,24 +84,49 @@ const initialValues = {
   police_station: '',
   post_code: "",
   country: '',
-  features: []
+  features: [],  
 };
 const AddListing = () => {
-    
+  
   const [checkedValues, setCheckedValues] = useState([])
-
+  const [images, setImages] = useState([])
   const [inputFiles, setInputFiles] = useState(null)
   const [inputFilesError, setInputFilesError] = useState("")
+  const [addProperty, {isLoading}] = useAddPropertyMutation()
+
+  const [loading, setLoading] = useState(false)
 
   const {values, setValues, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: initialValues,        
     validationSchema: propertySchema,
-    onSubmit: async (values) => {
+    onSubmit: async(values) => {
       
+      // --------- Image Uploading to Cloudinary
+      const images = [];
+      if(!inputFiles?.length) return   setInputFilesError("Photo is required")    
+      for(let i = 0; i < inputFiles?.length; i++){      
+        const data = await uploadToCludinary(inputFiles[i])
+        images.push(data?.secure_url)         
+      } 
      
-console.log("🚀 ~ onSubmit: ~ value:", values)    
+      const result = await addProperty({...values, images: images})
+
+      console.log(result)
+      if(result?.data){
+        console.log(result?.data)
+        toast.success("Created product successfully")  
+    }
+    if(result?.error){
+        // toast.error(`${result.error?.data}`,)
+        console.log(result?.error)
+    }
+    
     }
   })
+  
+  if(isLoading){
+    setLoading(true)
+  }
   
     
   const handleCheckboxChange = (event) => {
@@ -118,38 +144,6 @@ console.log("🚀 ~ onSubmit: ~ value:", values)
       features: checkedValues,
     })
   },[checkedValues])
-
-  const handlePhotoUpload = async() => {
-    if(!inputFiles?.length) return   setInputFilesError("Photo is required")
- 
-const formData = new FormData();
-
-inputFiles.forEach((file, index) => {
-  formData.append(`file${index}`, file); // Append each file with a unique key
-});
-
-formData.append("cloud_name", "dxspmmowc");
-formData.append("upload_preset", "walmart");
-
-try {
-  const url = "https://api.cloudinary.com/v1_1/dxspmmowc/image/upload";
-
-  const response = await fetch(url, {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!response.ok) {
-    
-    throw new Error("Failed to upload images");
-  }
-
-  const data = await response.json();
-  console.log(data);
-} catch (error) {
-  console.error("Error uploading images:", error);
-}
-  }
     
   return (
     <div className="">
@@ -492,13 +486,14 @@ try {
               <p className='text-red-600 text-sm pb-1'>{errors.features}</p>}
       </div>
         <ImageUpload setInputFiles={setInputFiles} inputFiles={inputFiles} />
+
+        
+        {inputFilesError && inputFiles.length < 1 &&
+              <p className='text-red-600 text-sm pb-1'>{inputFilesError}</p>}
         <button type="submit" className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-          Add Property
+         {loading && "loading...."} Add Property
         </button>      
-    </form>
-    <button onClick={()=>handlePhotoUpload()}
-    className="w-full bg-black/50 text-white py-2 "
-    >Image upload</button>
+    </form>  
   </div>
 </div>
     </div>

@@ -9,6 +9,14 @@ const propertiesApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ["Properties"
         getProperty: build.query({
             query: (id)=> `properties/${id}`,
             providesTags: ["Properties"]
+        }),
+        addProperty: build.mutation({
+            query: (data)=> ({
+                url: `properties`,
+                method: "POST",
+                body: data
+            }),
+            invalidatesTags: ["Properties"]
         })
     })
 })
@@ -16,4 +24,5 @@ const propertiesApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ["Properties"
 export const {
     useGetAllPropertiesQuery,
     useGetPropertyQuery,
+    useAddPropertyMutation,
 } = propertiesApiSlice;
