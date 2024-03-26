@@ -45,7 +45,8 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
       onChange={handleChange}
       onBlur={handleBlur}
     />
-     {errors.email && touched.email && <p className='text-red-600 text-sm pb-1'>{errors.email}</p>}
+     {errors.email && touched.email && 
+     <p className='text-red-600 text-sm pb-1'>{errors.email}</p>}
     <input
       type="password"
       className="mb-5 w-full border-b border-blue-300 py-2 text-slate-700 px-2"

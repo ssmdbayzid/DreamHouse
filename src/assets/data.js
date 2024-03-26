@@ -1,4 +1,6 @@
-export const propertyData = [
+export const propertyData = 
+[
+
     {
       "title": "Mountain View Retreat in Alpine",
       "location": "222 Serenity Lane, Alpine, CA 91901",
