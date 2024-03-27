@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/logo 2.png'
 import { useFormik } from 'formik'
 import { signUpSchema } from '../../schema'
+import { useSignupMutation } from '../../app/features/propertiesApiSlice'
 
 
 
@@ -12,19 +13,28 @@ const initialValues = {
   confirm_password: ""
 }
 const SignUp = () => {
+const  [signup] = useSignupMutation()
+  const [loading, setLoading] = useState(false)
   const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: initialValues,
     validationSchema: signUpSchema,
-    onSubmit: (values) => {
+    onSubmit: async(values) => {
       console.log("🚀 ~ SignUp ~ values:", values)
+      try {
+        const result = await signup(values)
+        console.log(result)
+        setLoading(false)
+      } catch (error) {
+        console.log(error?.message)
+      }
       
     }
   })
   
   console.log("🚀 ~ SignUp ~ errors:", errors)
   return (
-    <section className='section md:px-0 px-5 flex items-center justify-center  '>
-      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white px-5 py-3 shadow-xl">
+    <section className=' h-[85vh] bg-gradient-to-br from-blue-400 via-slate-200 to-green-400 md:px-0 px-5 flex items-center justify-center  '>
+      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50  shadow-primaryColor/50 px-5 py-3 shadow-xl">
   <div className="h-10 w-14 my-2 mx-auto overflow-hidden ">
     <img
       src={logo}
@@ -38,7 +48,7 @@ const SignUp = () => {
   <form onSubmit={handleSubmit}>
     <input
       type="text"
-      className=" px-2 w-full border-b border-blue-300 pb-2 text-slate-400"
+      className=" px-2 w-full border-b bg-transparent border-blue-300 py-2 text-slate-700"
       placeholder="Name"
       autoComplete="off"
       name='name'
@@ -49,7 +59,7 @@ const SignUp = () => {
     {errors.name && touched.name && <p className='text-red-600 text-sm'>{errors.name}</p>}
     <input
       type="email"
-      className="my-2 px-2 w-full border-b border-blue-300 pb-2 text-slate-400"
+      className="my-2 px-2 w-full border-b bg-transparent border-blue-300 py-2 text-slate-700"
       autoComplete="off"
       name='email'
       placeholder="Email"
@@ -61,7 +71,7 @@ const SignUp = () => {
 
     <input
       type="password"
-      className="my-2 px-2 w-full border-b border-blue-300 py-2 text-slate-400"
+      className="my-2 px-2 w-full border-b bg-transparent border-blue-300 py-2 text-slate-700"
       placeholder="Password"
       autoComplete="off"
       name='password'
@@ -73,7 +83,7 @@ const SignUp = () => {
 
     <input
       type="password"
-      className="my-2 px-2 w-full border-b border-blue-300 py-2 text-slate-400"
+      className="my-2 px-2 w-full border-b bg-transparent border-blue-300 py-2 text-slate-400"
       placeholder="Confirm Password"
       autoComplete="off"
       name='confirm_password'
@@ -83,8 +93,8 @@ const SignUp = () => {
     />
     {errors.confirm_password && touched.confirm_password && <p className='text-red-600 text-sm pb-1'>{errors.confirm_password}</p>}
 
-    <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-slate-200 py-2 text-xl  text-white font-bold">
-      Join
+    <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-slate-200 py-2 text-xl  text-white font-semilight">
+      {loading && "loading "}Join
     </button>
   </form>
   <div className="my-1 flex items-center justify-between gap-3">

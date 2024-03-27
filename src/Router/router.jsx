@@ -13,6 +13,7 @@ import DashBoardIndex from "../page/Dashboard/DashboardIndex";
 import AddListing from "../page/Dashboard/AddListing";
 import Profile from "../page/Dashboard/Profile";
 import MyListing from "../page/Dashboard/MyListing";
+import FavoriteItem from "../page/Dashboard/FavoriteItem";
 
 
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
                     index:true,
                     element: <DashBoardIndex />
                    },
+                    {
+                        path: "favorite-item",
+                        element: <FavoriteItem />
+                    },
                     {
                         path: "add-listing",
                         element: <AddListing />

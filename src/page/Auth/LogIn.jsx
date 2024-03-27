@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/logo 2.png'
 import { useFormik } from 'formik'
 import { loginSchema } from '../../schema'
+import { useLoginMutation } from '../../app/features/propertiesApiSlice'
 
 
 
@@ -11,19 +12,29 @@ const initialValues = {
 }
 
 const LogIn = () => {
-
+  const [login] = useLoginMutation()
+  const [loading, setLoading] = useState(false)
 const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
   initialValues: initialValues,
   validationSchema: loginSchema,
-  onSubmit: (values) => {
+  onSubmit: async(values) => {
     console.log("🚀 ~ LogIn ~ value:", values)    
+    setLoading(true)
+    try {
+      const result = await login(values)
+      console.log(result)
+      setLoading(false)
+    } catch (error) {
+      console.log(error?.message)
+    }
+
   }
 })
 
 
   return (
-    <section className='section md:px-0 px-5 flex items-center justify-center  '>
-      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white px-5 py-3 shadow-xl">
+    <section className='h-[85vh] bg-gradient-to-br from-blue-400 via-slate-200 to-green-400 md:px-0 px-5 flex items-center justify-center  '>
+      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50 px-5 py-3  shadow-primaryColor/50  shadow-xl">
   <div className="h-10 w-14 my-2 mx-auto overflow-hidden ">
     <img
       src={logo}
@@ -37,7 +48,7 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
   <form onSubmit={handleSubmit}>
     <input
       type="email"
-      className="mb-5 w-full border-b border-blue-300 py-2 text-slate-700 px-2"
+      className="mb-5 w-full border-b bg-transparent border-blue-300 py-2 text-slate-900 px-2"
       placeholder="Email"
       autoComplete="off"
       name="email"
@@ -49,7 +60,7 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
      <p className='text-red-600 text-sm pb-1'>{errors.email}</p>}
     <input
       type="password"
-      className="mb-5 w-full border-b border-blue-300 py-2 text-slate-700 px-2"
+      className="mb-5 w-full border-b bg-transparent border-blue-300 py-2 text-slate-900 px-2"
       placeholder="Password"
       autoComplete="off"
       name='password'
@@ -58,8 +69,8 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
       onBlur={handleBlur}
     />
       {errors.password && touched.password && <p className='text-red-600 text-sm pb-1'>{errors.password}</p>}
-    <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-white py-2 text-xl  text-white font-bold">
-      Log In
+    <button  className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-white py-2 text-xl  text-white font-bold">
+     {loading && "loading..."} Log In
     </button>
   </form>
   <div className="my-5 flex items-center justify-between gap-3">

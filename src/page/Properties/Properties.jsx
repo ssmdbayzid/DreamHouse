@@ -9,6 +9,8 @@ import { useGetAllPropertiesQuery } from '../../app/features/propertiesApiSlice'
 import Loader from '../../hooks/Loader'
 import { useSearchParams } from 'react-router-dom'
 
+
+
 const Properties = () => {
   
   const [openFilterMenu, setOpenFilterMenu] = useState(false)
@@ -43,7 +45,11 @@ const Properties = () => {
     if(propertiesData){
         filteredItems = propertiesData?.filter(
         property => property.title.toLowerCase().includes(query.toLowerCase()) 
-        || property.location.toLowerCase().includes(query.toLowerCase())
+        || property.street.toLowerCase().includes(query.toLowerCase())
+        || property.city.toLowerCase().includes(query.toLowerCase())
+        || property.post_office.toLowerCase().includes(query.toLowerCase())
+        || property.police_station.toLowerCase().includes(query.toLowerCase())
+        || property.country.toLowerCase().includes(query.toLowerCase())        
         )
     }
 
@@ -66,24 +72,23 @@ const Properties = () => {
 
     const result = filterProperties(propertiesData, selectedType, query)
    
-    
+    console.log(propertiesData)
     // --------- Sort By H2L or L2H rent--------
 
     const onChangeSort = (e) =>{      
       if(e.target.value === "H2L"){
-        const sorted = [...propertiesData].sort((a,b)=> b.rent - a.rent)
+        const sorted = [...propertiesData].sort((a,b)=> b.price - a.price)
         setPropertiesData(sorted)
       }else if(e.target.value === "L2H"){
-        const sorted = [...propertiesData].sort((a,b)=> a.rent - b.rent)
+        const sorted = [...propertiesData].sort((a,b)=> a.price - b.price)
         setPropertiesData(sorted)
-      }else if(e.target.value === ""){       
-        if(propertyData)  setPropertiesData(propertyData)
+      }else if(e.target.value ===""){       
+        if(propertyData) setPropertiesData(propertyData)
       }     
     }
 
     
-     
-    console.log(propertiesData)
+         
     return (
     <section className='section '>
        {loading ? <>       

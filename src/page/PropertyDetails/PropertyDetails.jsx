@@ -16,16 +16,13 @@ import ScheduleForm from './ScheduleForm';
 
 import LeaveReviewForm from './LeaveReviewForm';
 import ReviewSection from './ReviewSection';
+import { propertiesData } from '../../assets/data/PropertiesData';
 const PropertyDetails = () => {
   const {id} = useParams()
   const [loading, setLoading] = useState(false);
   const [property, setProperty] = useState(null)
   const {data, isLoading} = useGetPropertyQuery(id)
 
-
-  
-
-  
 
   useEffect(()=>{
    
@@ -39,46 +36,45 @@ const PropertyDetails = () => {
 },[data])
   
 
-
   return (
     <section className='section bg-accent'>
     <div className='container'>
     {
-      loading ? <Loader /> 
+      loading && !property ? <Loader /> 
       : 
       <>
-    <div className="px-4 md:py-5 mb-5 bg-white rounded-md  flex items-center justify-between">
+    {property && <> <div className="px-4 md:py-5 mb-5 bg-white rounded-md  flex items-center justify-between">
     <div className="">
       <h1 className="text-2xl font-bold">{property?.title}</h1>
-      <p className="text-slate-400">{property?.location}</p>
+      <p className="text-slate-400">{property?.street}</p>
     </div>
     <div className="">
-      <h1 className="text-2xl font-bold capitalize">${property?.rent} / {property?.postfix}</h1>
+      <h1 className="text-2xl font-bold capitalize">${property?.price} / {property?.rent_duration}</h1>
       <p className="text-right text-slate-400">Price</p>
     </div>
   </div>
-  <div className=" md:px-0 px-4 flex  flex-col gap-3 md:flex-row">
-    <div className="w-full  md:w-2/3">
+  <div className="  flex  bg-white flex-col gap-3 md:flex-row">
+    <div className="w-full h-full md:w-2/3">
       <img
-        src="https://housing.com/news/wp-content/uploads/2022/11/shutterstock_1715891752-1200x700-compressed.jpg"
-        className="h-full w-full object-center"
+        src={property?.images[0]}
+        className="h-full w-full object-cover"
         alt=""
       />
     </div>
-    <div className="flex h-24 flex-row gap-3 md:h-full md:w-1/3 md:flex-col">
+    <div className="flex 7 flex-row gap-3 overflow-hidden md:w-1/3 md:flex-col">
       <img
-        src="https://assets-news.housing.com/news/wp-content/uploads/2020/05/04190400/17-fabulous-bedroom-decor-ideas-FB-1200x700-compressed.jpg"
-        className="h-full w-1/2 object-center md:w-full"
+        src={property?.images[1]}
+        className="h-full w-full object-cover md:w-full"
         alt=""
       />
       <img
-        src="https://i.pinimg.com/originals/0c/74/f9/0c74f93ab8b1b2df7b12eea64693a2a5.png"
-        className="h-full w-1/2 object-center md:w-full"
+        src={property?.images[2]}
+        className="h-full w-1/2 object-cover md:w-full"
         alt=""
       />
     </div>
   </div>
-  <div className="flex md:flex-row flex-col mt-10 gap-3">
+  <div className="flex items-start justify-end md:flex-row flex-col mt-10 gap-3">
     <div className="w-full md:w-2/3 md:px-0 px-4">
     <div className="bg-white px-5 py-10 rounded-md">
       <div className="flex items-center justify-between ">
@@ -88,35 +84,35 @@ const PropertyDetails = () => {
     <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5">
         <div className=''>
           <p className="flex items-center text-slate-500 gap-2 text-md  mb-2"><BsFillTagFill /> Property Type</p>
-          <h3 className="text-md text-slate-600 font-bold pl-5 capitalize">{property?.propertyType}</h3>
+          <h3 className="text-md text-slate-600 font-bold pl-5 capitalize">{property?.property_type}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><FaUserAlt /> Agent</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.propertyAgent}</h3>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.agent_name}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><FaRegCalendarAlt /> Listed</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.propertyDate}</h3>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.listed_date}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><FaDollarSign /> Rent</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">${property?.rent} / {property?.postfix}</h3>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">${property?.price} / {property?.rent_duration}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><IoBedOutline /> Bed</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.bed}</h3>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.bedrooms}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><MdOutlineSoupKitchen /> Kitche</p>
           <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.kitchen}</h3>
         </div>
         <div className=''>
-          <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><PiGarage /> Ware House</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">1</h3>
+          <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><PiGarage /> Garage</p>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.garage}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><PiGridNineLight /> Area</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.sqFt} SqFt</h3>
+          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.property_area} SqFt</h3>
         </div>
       </div>
       </div>  
@@ -140,18 +136,18 @@ const PropertyDetails = () => {
         <div className="w-full md:w-1/2">
           <div className="mb-2 flex items-center justify-between">
           <h2 className='font-bold'>Address</h2>
-          <p className='font-light'>8100 S Ashland Ave</p>          
+          <p className='font-light'>{property.street}</p>          
           </div>
           <hr />
           <div className="mb-2 flex items-center justify-between">
           <h2 className='font-bold'>City</h2>
-          <p className='font-light'>Chicago</p>
+          <p className='font-light'>{property.city}</p>
           </div>
           <hr />
 
           <div className="mb-2 flex items-center justify-between">
           <h2 className='font-bold'>State/county</h2>
-          <p className='font-light'>Illinois</p>
+          <p className='font-light'>{property.post_office}</p>
           </div>       
           <hr />
 
@@ -160,19 +156,19 @@ const PropertyDetails = () => {
         
           <div className="mb-2 flex items-center justify-between">
           <h2 className='font-bold'>Zip/Postal Code</h2>
-          <p className='font-light'>60620</p>
+          <p className='font-light'>{property.post_code}</p>
           </div>
           <hr />
 
           <div className="mb-2 flex items-center justify-between">
           <h2 className='font-bold'>Area</h2>
-          <p className='font-light'>Beverly</p>
+          <p className='font-light'>{property.police_station}</p>
           </div>
           <hr />
 
           <div className="mb-2 flex items-center justify-between">
           <h2 className='font-bold'>Country</h2>
-          <p className='font-light'>United States</p>
+          <p className='font-light'>{property.country}</p>
           </div>         
           <hr />
         </div>
@@ -181,6 +177,40 @@ const PropertyDetails = () => {
 
       <div className="bg-white mt-10 px-5 py-5 rounded-md">
       <p className='text-xl  mb-5'>Features</p> 
+ 
+      <div className="grid md:grid-cols-3 grid-cols-1">
+        {property.features.map((feature, index)=>        
+        <p key={index} className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> {feature}</p>       
+       )}
+      </div>
+  
+      </div>
+      <ReviewSection reviews={property?.comments} />
+      
+  <LeaveReviewForm />
+    </div>
+    <div className="w-full sticky top-20 bg-white py-5 border md:w-1/3 md:px-0 px-4">          
+     <ScheduleForm />
+    </div>
+  </div></>}
+      </>
+    }  
+    {/* <Map location="sasdfsdf" city="city" country="country" /> */}
+    </div>
+    </section>
+  )
+}
+
+export default PropertyDetails;
+
+
+
+
+
+
+
+  {/*
+    <>
     <div class="flex flex-wrap items-center justify-start md:justify-between  w-full">
     <div>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Air Conditioning</p>
@@ -204,24 +234,6 @@ const PropertyDetails = () => {
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> TV Cable</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Window Coverings</p>
     </div>
-    </div>    
-      </div>
-      <ReviewSection />
-      
-  <LeaveReviewForm />
-    </div>
-    <div className="w-full py-5 border md:w-1/3 md:px-0 px-4">
-          
-     <ScheduleForm />
-    </div>
-  </div>
-      </>
-    }  
-    {/* <Map location="sasdfsdf" city="city" country="country" /> */}
-    </div>
-    </section>
-  )
-}
-
-export default 
-PropertyDetails
+    </div>     
+    </>
+    */}

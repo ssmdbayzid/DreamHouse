@@ -70,29 +70,30 @@ const checkboxData =
 ]
 
 const initialValues = {
-  property_name: '',
+  title: '',
   agent_name: '',
   property_type: '',
   price: "",
-  postfix: "",
+  rent_duration: "",
   bedrooms: "",
   kitchen: "",
-  ware_house: "",
+  garage: "",
+  description: "",
   property_area: "",  
   post_office: '',
   city: '',
   police_station: '',
   post_code: "",
   country: '',
+  street :"",
   features: [],  
 };
 const AddListing = () => {
   
-  const [checkedValues, setCheckedValues] = useState([])
-  const [images, setImages] = useState([])
+  const [checkedValues, setCheckedValues] = useState([])  
   const [inputFiles, setInputFiles] = useState(null)
   const [inputFilesError, setInputFilesError] = useState("")
-  const [addProperty, {isLoading}] = useAddPropertyMutation()
+  const [addProperty] = useAddPropertyMutation()
 
   const [loading, setLoading] = useState(false)
 
@@ -107,32 +108,27 @@ const AddListing = () => {
       for(let i = 0; i < inputFiles?.length; i++){      
         const data = await uploadToCludinary(inputFiles[i])
         images.push(data?.secure_url)         
-      } 
-     
-      const result = await addProperty({...values, images: images})
-
-      console.log(result)
-      if(result?.data){
-        console.log(result?.data)
-        toast.success("Created product successfully")  
-    }
-    if(result?.error){
-        // toast.error(`${result.error?.data}`,)
-        console.log(result?.error)
-    }
-    
+      }      
+      setLoading(true)
+      try {
+        const result = await addProperty({...values, images: images})        
+        console.log(result)
+      setLoading(false)
+      } catch (error) {
+        console.log(result?.error)        
+      }          
     }
   })
   
-  if(isLoading){
-    setLoading(true)
-  }
+ 
   
     
   const handleCheckboxChange = (event) => {
     const {name, checked} = event.target;
 
-    if(checked) setCheckedValues([...checkedValues, name])
+    if(checked){
+    setCheckedValues([...checkedValues, name])
+  }
     else{
       setCheckedValues(checkedValues.filter(value => value !== name));
     }
@@ -153,24 +149,24 @@ const AddListing = () => {
     <form onSubmit={handleSubmit}>
       <div className="mb-5">
         <label
-          htmlFor="property_name"
+          htmlFor="title"
           className="mb-3 block text-base font-medium text-[#07074D]"
         >
           Property Name
         </label>
         <input
           type="text"
-          name="property_name"
-          value={values.property_name}
+          name="title"
+          value={values.title}
           onChange={handleChange}
           onBlur={handleBlur}
           autoComplete="off"
-          id="property_name"          
-          placeholder="Enter property name"
+          id="title"          
+          placeholder="Enter Title"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
-        {errors?.property_name && touched?.property_name && 
-        <p className='text-red-600 text-sm pb-1'>{errors.property_name}</p>}
+        {errors?.title && touched?.title && 
+        <p className='text-red-600 text-sm pb-1'>{errors.title}</p>}
       </div>
       <div className="mb-5">
         <label
@@ -247,25 +243,25 @@ const AddListing = () => {
           htmlFor="property_type"
           className="mb-3 block text-base font-medium text-[#07074D]"
         >
-          Postfix
+          Rent Duration
         </label>
         <select
-          name="postfix"
-          value={values.postfix}
+          name="rent_duration"
+          value={values.rent_duration}
           onChange={handleChange}
           onBlur={handleBlur}
-          id="postfix"
+          id="rent_duration"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         >
           <option value="" disabled="" selected="">
-            Select postfix
+            Select rent_duration
           </option>
           <option value="month">Month</option>
           <option value="week">Week</option>
           <option value="year">Year</option>          
         </select>
-        {errors?.postfix && touched?.postfix && 
-        <p className='text-red-600 text-sm pb-1'>{errors.postfix}</p>}
+        {errors?.rent_duration && touched?.rent_duration && 
+        <p className='text-red-600 text-sm pb-1'>{errors.rent_duration}</p>}
       </div>
       </div>
       <div className="-mx-3 flex flex-wrap">
@@ -318,23 +314,23 @@ const AddListing = () => {
         <div className="w-full px-3 sm:w-1/2">
           <div className="mb-5">
             <label
-              htmlFor="ware-house"
+              htmlFor="garage"
               className="mb-3 block text-base font-medium text-[#07074D]"
             >
-              Ware House
+              Garage
             </label>
             <input
               type="number"
-              name="ware_house"
-              value={values.ware_house}
+              name="garage"
+              value={values.garage}
               onChange={handleChange}
               onBlur={handleBlur}
               id="ware-house"
-              placeholder="Enter number of ware-house"
+              placeholder="Enter number of garage"
               className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
-             {errors?.ware_house && touched?.ware_house && 
-        <p className='text-red-600 text-sm pb-1'>{errors.ware_house}</p>}
+             {errors?.garage && touched?.garage && 
+        <p className='text-red-600 text-sm pb-1'>{errors.garage}</p>}
           </div>
         </div>
         <div className="w-full px-3 sm:w-1/2">
@@ -360,6 +356,26 @@ const AddListing = () => {
           </div>
         </div>
       </div>
+      <div className="mb-5">
+      <label
+          htmlFor="description"
+          className="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Property Description
+        </label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          value={values.description}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="Property Description"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+         {errors?.description && touched?.description && 
+        <p className='text-red-600 text-sm pb-1'>{errors.description}</p>}
+      </div> 
       <div className="mb-5 pt-3">
         <label className="mb-5 block text-base font-semibold text-[#07074D] sm:text-xl">
           Address Details

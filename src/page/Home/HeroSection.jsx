@@ -16,10 +16,10 @@ const HeroSection = () => {
 or rent a home, we really are the people  for you to come to.</p>
       </div>
       {/* ------------- Hero Section End ---------------- */}
-  <div className=" w-3/5 mt-10 mx-auto">
+  <div className=" w-3/5 mt-10 mx-auto bg-black/50 p-8">
     <form
       action=""
-      className=" bg-white flex md:flex-row flex-col justify-canter gap-10 items-center px-8 py-8 shadow-2xl rounded-md"
+      className=" bg-white flex md:flex-row p-2 flex-col justify-canter gap-5 items-center  shadow-2xl rounded-md"
     >
       <div className="flex flex-col w-full md:w-2/5">
         <label className="font-bold mb-2" htmlFor="location">
