@@ -3,6 +3,7 @@ import logo from '../../assets/logo 2.png'
 import { useFormik } from 'formik'
 import { signUpSchema } from '../../schema'
 import { useSignupMutation } from '../../app/features/propertiesApiSlice'
+import { useSelector } from 'react-redux'
 
 
 
@@ -20,8 +21,9 @@ const  [signup] = useSignupMutation()
     validationSchema: signUpSchema,
     onSubmit: async(values) => {
       console.log("🚀 ~ SignUp ~ values:", values)
+      const {confirm_password, ...rest} = values;
       try {
-        const result = await signup(values)
+        const result = await signup(rest)
         console.log(result)
         setLoading(false)
       } catch (error) {
@@ -30,11 +32,13 @@ const  [signup] = useSignupMutation()
       
     }
   })
+
+  const user= useSelector(state=>state.user.user)
   
-  console.log("🚀 ~ SignUp ~ errors:", errors)
+  console.log(user)
   return (
     <section className=' h-[85vh] bg-gradient-to-br from-blue-400 via-slate-200 to-green-400 md:px-0 px-5 flex items-center justify-center  '>
-      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50  shadow-primaryColor/50 px-5 py-3 shadow-xl">
+      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50  shadow-primaryColor/50 px-5 py-8 shadow-xl">
   <div className="h-10 w-14 my-2 mx-auto overflow-hidden ">
     <img
       src={logo}
@@ -93,11 +97,11 @@ const  [signup] = useSignupMutation()
     />
     {errors.confirm_password && touched.confirm_password && <p className='text-red-600 text-sm pb-1'>{errors.confirm_password}</p>}
 
-    <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-slate-200 py-2 text-xl  text-white font-semilight">
+    <button className="w-full rounded-full bg-gradient-to-tr from-primaryColor to-slate-200 py-2 mt-5 text-xl  text-white font-semilight">
       {loading && "loading "}Join
     </button>
   </form>
-  <div className="my-1 flex items-center justify-between gap-3">
+  {/* <div className="my-1 flex items-center justify-between gap-3">
     <hr className="h-0.5 w-1/3 bg-slate-300" />
     <span>or</span>
     <hr className="h-0.5 w-1/3 bg-slate-300" />
@@ -107,7 +111,7 @@ const  [signup] = useSignupMutation()
       G
     </span>{" "}
     Google
-  </p>
+  </p> */}
 </div>
 
     </section>

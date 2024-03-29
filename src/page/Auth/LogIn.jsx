@@ -3,6 +3,8 @@ import logo from '../../assets/logo 2.png'
 import { useFormik } from 'formik'
 import { loginSchema } from '../../schema'
 import { useLoginMutation } from '../../app/features/propertiesApiSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../app/features/userSlice'
 
 
 
@@ -14,6 +16,8 @@ const initialValues = {
 const LogIn = () => {
   const [login] = useLoginMutation()
   const [loading, setLoading] = useState(false)
+
+  const dispatch = useDispatch()
 const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
   initialValues: initialValues,
   validationSchema: loginSchema,
@@ -23,6 +27,7 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
     try {
       const result = await login(values)
       console.log(result)
+      dispatch(setUser(result?.data?.user))
       setLoading(false)
     } catch (error) {
       console.log(error?.message)
@@ -31,10 +36,14 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
   }
 })
 
+// const user = useSelector((state)=>state.userSlice.user);
+
+// if(user)console.log(user)
+
 
   return (
     <section className='h-[85vh] bg-gradient-to-br from-blue-400 via-slate-200 to-green-400 md:px-0 px-5 flex items-center justify-center  '>
-      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50 px-5 py-3  shadow-primaryColor/50  shadow-xl">
+      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50 px-5 py-8  shadow-primaryColor/50  shadow-xl">
   <div className="h-10 w-14 my-2 mx-auto overflow-hidden ">
     <img
       src={logo}
@@ -73,7 +82,7 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
      {loading && "loading..."} Log In
     </button>
   </form>
-  <div className="my-5 flex items-center justify-between gap-3">
+  {/*<div className="my-5 flex items-center justify-between gap-3">
     <hr className="h-0.5 w-1/3 bg-slate-300" />
     <span>or</span>
     <hr className="h-0.5 w-1/3 bg-slate-300" />
@@ -83,7 +92,7 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
       G
     </span>{" "}
     Google
-  </p>
+     </p>*/}
 </div>
 
     </section>
