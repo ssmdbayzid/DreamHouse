@@ -5,6 +5,8 @@ import { loginSchema } from '../../schema'
 import { useLoginMutation } from '../../app/features/propertiesApiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../../app/features/userSlice'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -18,6 +20,7 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
   initialValues: initialValues,
   validationSchema: loginSchema,
@@ -26,9 +29,10 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
     setLoading(true)
     try {
       const result = await login(values)
-      console.log(result)
+      console.log(result?.data)
       dispatch(setUser(result?.data?.user))
       setLoading(false)
+      navigate("/")
     } catch (error) {
       console.log(error?.message)
     }
@@ -36,14 +40,43 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
   }
 })
 
-// const user = useSelector((state)=>state.userSlice.user);
 
-// if(user)console.log(user)
+const fetchAuthUser = async () =>{
+  const response = await axios.get("http://localhost:5000/api/v1/auth/user", {withCredentials: true})
+  .catch(err=>{
+    console.log(err)
+  console.log("error: Cannot properly authenticate")
+  })
+  if(response && response?.data){
+    console.log(response.data)
+  }
+}
 
+  const redirectToGoogle = () =>{
+    let timer = null;
+    const googleLoginUrl = "http://localhost:5000/api/v1/login/google"
+      const newWindow = window.open(
+        googleLoginUrl,
+        "_black",
+        "width=500,height=600",
+      )
+
+      if(newWindow){
+        timer = setInterval(()=>{
+         if(newWindow.closed){
+          fetchAuthUser()
+          console.log("yea  we  are authotized")
+          if(timer){
+            clearInterval(timer)
+          }}
+        }, 500)
+      }
+    
+  }
 
   return (
-    <section className='h-[85vh] bg-gradient-to-br from-blue-400 via-slate-200 to-green-400 md:px-0 px-5 flex items-center justify-center  '>
-      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50 px-5 py-8  shadow-primaryColor/50  shadow-xl">
+    <section className='min-h-screen bg-gradient-to-br from-blue-400 via-slate-200 to-green-400 md:px-0 px-5 flex items-center justify-center  '>
+      <div className="mx-auto w-full max-w-[500px] rounded-2xl border bg-white/50 px-5 my-4 py-4  shadow-primaryColor/50  shadow-xl">
   <div className="h-10 w-14 my-2 mx-auto overflow-hidden ">
     <img
       src={logo}
@@ -82,13 +115,15 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
      {loading && "loading..."} Log In
     </button>
   </form>
-  {/*<div className="my-5 flex items-center justify-between gap-3">
+  {/*
+    --------------------------- Pending authentication --------------------
+  <div className="my-5 flex items-center justify-between gap-3">
     <hr className="h-0.5 w-1/3 bg-slate-300" />
     <span>or</span>
     <hr className="h-0.5 w-1/3 bg-slate-300" />
   </div>
-  <p className="flex items-center justify-center gap-3 border-purple-300 border-2 bg-slate-200 py-2 text-center text-2xl font-light">
-    <span className="inline-block bg-gradient-to-tr from-purple-500 to-blue-600 bg-clip-text text-3xl font-semibold text-transparent">
+  <p onClick={redirectToGoogle} className=" cursor-pointer flex items-center justify-center gap-3 border-purple-300 border-2 bg-slate-200 py-1 text-center text-xl font-light">
+    <span className="inline-block bg-gradient-to-tr from-purple-500 to-blue-600 bg-clip-text text-xl font-semibold text-transparent">
       G
     </span>{" "}
     Google

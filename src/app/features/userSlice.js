@@ -14,10 +14,15 @@ const userSlice = createSlice({
             // set user to localStorage
 
             localStorage.setItem("user", JSON.stringify(state.user))
+        },
+        logOut: (state, action)=>{
+            state.user = [];
+
+            localStorage.setItem("user", state.user)
         }
     }
 })
 
-export const {setUser} = userSlice.actions;
+export const {setUser, logOut} = userSlice.actions;
 
 export default userSlice.reducer;

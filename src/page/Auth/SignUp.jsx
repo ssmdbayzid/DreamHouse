@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import { signUpSchema } from '../../schema'
 import { useSignupMutation } from '../../app/features/propertiesApiSlice'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -16,6 +17,8 @@ const initialValues = {
 const SignUp = () => {
 const  [signup] = useSignupMutation()
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
   const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: initialValues,
     validationSchema: signUpSchema,
@@ -24,7 +27,9 @@ const  [signup] = useSignupMutation()
       const {confirm_password, ...rest} = values;
       try {
         const result = await signup(rest)
-        console.log(result)
+        console.log(result?.data)        
+        setLoading(false)
+        navigate("/login")
         setLoading(false)
       } catch (error) {
         console.log(error?.message)
@@ -101,7 +106,10 @@ const  [signup] = useSignupMutation()
       {loading && "loading "}Join
     </button>
   </form>
-  {/* <div className="my-1 flex items-center justify-between gap-3">
+  {/*
+    --------------------------- Pending authentication --------------------
+  
+  <div className="my-1 flex items-center justify-between gap-3">
     <hr className="h-0.5 w-1/3 bg-slate-300" />
     <span>or</span>
     <hr className="h-0.5 w-1/3 bg-slate-300" />

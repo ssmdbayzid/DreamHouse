@@ -6,6 +6,10 @@ import { RxCross2 } from "react-icons/rx";
 import Menu from './Menu';
 import { MdOutlineFileDownload } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaRegUserCircle } from "react-icons/fa";
+import { logOut } from '../app/features/userSlice';
+
 
 const Link = ({page, selectedPage, setSelectedPage}) => {
   const lowerCasePage = page.toLowerCase();
@@ -46,8 +50,11 @@ const navLinks = [
 const Header = ({setSelectedPage, selectedPage}) => {
   const [scroll, setScroll] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false)
-  const [user, setUser] = useState(false)
+  // const [user, setUser] = useState(false)
 
+  const user = useSelector(state=>state.user.user);
+
+  const dispatch = useDispatch()
 
   // change nav color when scroll
   const onChange = () => {
@@ -57,14 +64,15 @@ const Header = ({setSelectedPage, selectedPage}) => {
       setScroll(false);
     }
   };
-  window.addEventListener('scroll', onChange);
-  
+  window.addEventListener('scroll', onChange);  
   let path;
   useEffect(()=>{
     path = location.pathname.split("/")[1]
   },[path])
   
   // path && path !== "home"
+
+
   return (
     
     <div
@@ -96,54 +104,19 @@ const Header = ({setSelectedPage, selectedPage}) => {
               )
           }
           </ul>
-
-          <ul className='font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
+          <>
+          {user ?
+          <div className="relative">
+            
+            <button onClick={()=>dispatch(logOut())}  className='px-4 py-2 bg-primaryColor text-white'>Logout</button>
+          </div>
+           :<ul className='font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
           <NavLink to="/log-in" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-semibold"
             : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}>Log In</NavLink>
           <NavLink  to="/sign-up" className={navClass => navClass.isActive ? "px-4 py-1.5 bg-primaryColor text-white transition duration-500 cursor-pointer font-semibold"
             : " hover:text-slate-200 transition duration-500 cursor-pointer px-4 py-1.5 bg-primaryColor text-white"} >Join</NavLink>
-          </ul>
-         
-          {/* <ul className="font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse bg-transparent">
-            <li>
-            <Link page="Home"
-            className="text-primary"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>
-           
-            <li>
-            <Link page="Contact"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>
-            <li>
-            <Link page="Properties"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>
-           {user && <li>
-            <Link page="Log In"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>}
-            <li>
-            <Link page="Sign Up"
-            setSelectedPage={setSelectedPage}
-            selectedPage={selectedPage}
-            />
-            </li>
-            <li>
-            <a className='px-4 py-1.5 font-light  flex items-center gap-2'
-        href="../assets/Resume of Bayzid.pdf" download="../assets/Resume of Bayzid.pdf">
-        Resume <MdOutlineFileDownload className='text-xl' />
-        </a>
-            </li>
-          </ul> */}
+          </ul>}
+          </>        
         </div>
       </div>
       <div className={`md:hidden  absolute top-0 h-screen bg-slate-200 w-4/5 overflow-y-auto transition-transform transform ${menuToggle ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-300`}>

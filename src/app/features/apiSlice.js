@@ -5,7 +5,7 @@ let token = "this token"
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1/",
+    baseUrl: "https://dream-house-server-7ss1.vercel.app/api/v1/",
     prepareHeaders:(header)=> {
         if(token){
             header.set("Authorization", `Bearer ${token}`)

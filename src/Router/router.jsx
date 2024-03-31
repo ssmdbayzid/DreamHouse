@@ -14,6 +14,8 @@ import AddListing from "../page/Dashboard/AddListing";
 import Profile from "../page/Dashboard/Profile";
 import MyListing from "../page/Dashboard/MyListing";
 import FavoriteItem from "../page/Dashboard/FavoriteItem";
+import LoginFailed from "../page/Auth/LoginFailed";
+import LoginSuccess from "../page/Auth/LoginSuccess";
 
 
 
@@ -73,6 +75,14 @@ const router = createBrowserRouter([
             {
                 path: "/log-in",
                 element: <LogIn />
+            },         
+            {
+                path: "/login/failed",
+                element: <LoginFailed />
+            },         
+            {
+                path: "/login/success",
+                element: <LoginSuccess />
             },         
             {
                 path: "/sign-up",
