@@ -16,6 +16,7 @@ import MyListing from "../page/Dashboard/MyListing";
 import FavoriteItem from "../page/Dashboard/FavoriteItem";
 import LoginFailed from "../page/Auth/LoginFailed";
 import LoginSuccess from "../page/Auth/LoginSuccess";
+import MyProperties from "../page/Dashboard/MyProperties";
 
 
 
@@ -52,11 +53,15 @@ const router = createBrowserRouter([
                 children: [
                    {
                     index:true,
-                    element: <DashBoardIndex />
+                    element: <FavoriteItem />
                    },
                     {
                         path: "favorite-item",
                         element: <FavoriteItem />
+                    },
+                    {
+                        path: "my-properties",
+                        element: <MyProperties />
                     },
                     {
                         path: "add-listing",

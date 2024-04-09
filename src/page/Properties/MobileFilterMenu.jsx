@@ -7,7 +7,7 @@ const MobileFilterMenu = ({setOpenFilterMenu, openFilterMenu, handleChange, onCh
       
       <div  className="fixed inset-0 z-[999] bg-black/60"></div>
 
-      <div onClick={()=>setOpenFilterMenu(!openFilterMenu)}   className="fixed z-[999]  inset-0   flex">
+      <div   className="fixed z-[999] top-14  inset-0   flex">
      
         <div className="relative  ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
           <div className="flex items-center justify-between px-4">
@@ -30,7 +30,9 @@ const MobileFilterMenu = ({setOpenFilterMenu, openFilterMenu, handleChange, onCh
            
              <div  className="pt-3" id="filter-section-mobile-1">
                 <div className="space-y-6">
-                  <div className="flex items-center">
+                  <div
+                  onClick={()=> setOpenFilterMenu(!openFilterMenu)}                  
+                  className="flex items-center">
                     <input
                     onChange={handleChange}
                     value="for rent" 
@@ -42,7 +44,10 @@ const MobileFilterMenu = ({setOpenFilterMenu, openFilterMenu, handleChange, onCh
               </div>
              <div  className="pt-3" id="filter-section-mobile-1">
                 <div className="space-y-6">
-                  <div className="flex items-center">
+                  <div
+                  onClick={()=> setOpenFilterMenu(!openFilterMenu)}
+                  className="flex items-center">
+                  
                     <input
                     onChange={handleChange}
                     value="for sale" 
@@ -54,7 +59,10 @@ const MobileFilterMenu = ({setOpenFilterMenu, openFilterMenu, handleChange, onCh
               </div>
              <div  className="pt-3" id="filter-section-mobile-1">
                 <div className="space-y-6">
-                  <div className="flex items-center">
+                  <div
+                  onClick={()=> setOpenFilterMenu(!openFilterMenu)}
+                  className="flex items-center">
+                  
                     <input
                     onChange={handleChange}
                     value="" 
@@ -76,21 +84,22 @@ const MobileFilterMenu = ({setOpenFilterMenu, openFilterMenu, handleChange, onCh
                    <div className=" ">
     <p>Short :</p>
     <select  
-    onChange={onChangeSort}  
+    onChange={(event) => 
+      {onChangeSort(event);setOpenFilterMenu(!openFilterMenu)}} 
+    // onChange={onChangeSort, setOpenFilterMenu(!openFilterMenu)}  
     name="" id="" className="w-full px-2 py-2 border-2">
-      <option
+      <option      
       value=""          
        className="w-full px-2 py-2 border-2 mb-3">
        Select
       </option>
-      <option
+      <option      
       value="L2H"          
        className="w-full px-2 py-2 border-2 mb-3">
         Low to high rate
       </option>
-      <option 
-      value="H2L"
-      // onChange={(e)=>e.target.value}      
+      <option         
+      value="H2L"      
        className="w-full px-2 py-2 border-2">
         High to low rate
       </option>

@@ -7,7 +7,7 @@ const Appartment = () => {
   return (
     <section className='section'>
  <div className='container'>
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10">
+  <div className="grid grid-cols-1  lg:grid-cols-3 gap-5 md:gap-10">
     <div className="flew overflow-hidden h-full">
       <div className="mb-5  md:h-1/2 h-full flex flex-col items-start justify-center">
       <h1 className='font-light text-4xl md:mr-auto mx-auto md:mx-0 '>Resident</h1> 
@@ -19,7 +19,7 @@ const Appartment = () => {
           eiusmod tempor incidi dunt
         </p>
       </div>
-      <Link to={`/properties?type=appartment`} >
+      <Link to={`/properties?type=apartment`} >
        <div className="md:h-1/2 h-full relative">       
         <img
           src="https://demo01.houzez.co/wp-content/uploads/2020/03/205-1024x683.jpg"

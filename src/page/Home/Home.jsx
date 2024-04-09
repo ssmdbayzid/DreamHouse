@@ -11,6 +11,7 @@ import City from './City'
 import Appartment from './Appartment'
 
 const Home = () => {
+  
   return (
     <div className=''>        
        {/* <HeroSection2 /> */}

@@ -40,11 +40,7 @@ const navLinks = [
   {
       path: '/contact',
       display: "Contact",
-  }, 
-  {
-      path: '/dashboard',
-      display: "Dashboard",
-  }, 
+  },  
 ]
 
 const Header = ({setSelectedPage, selectedPage}) => {
@@ -106,9 +102,12 @@ const Header = ({setSelectedPage, selectedPage}) => {
           </ul>
           <>
           {user ?
-          <div className="relative">
-            
+          <div className="relative">  
+           <NavLink to="/dashboard" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-semibold"
+            : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}>Dasboard</NavLink>           
             <button onClick={()=>dispatch(logOut())}  className='px-4 py-2 bg-primaryColor text-white'>Logout</button>
+            
+           
           </div>
            :<ul className='font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
           <NavLink to="/log-in" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-semibold"
@@ -119,15 +118,12 @@ const Header = ({setSelectedPage, selectedPage}) => {
           </>        
         </div>
       </div>
-      <div className={`md:hidden  absolute top-0 h-screen bg-slate-200 w-4/5 overflow-y-auto transition-transform transform ${menuToggle ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-300`}>
+      <div className={`md:hidden  absolute top-0 h-screen bg-slate-800 w-4/5 overflow-y-auto transition-transform transform ${menuToggle ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-300`}>
   <div className="flex justify-between items-center">
     {/* -------- Logo ------- */}
   <p className="flex items-center space-x-3 rtl:space-x-reverse">          
           <a href='/'
-           className="flex items-center self-center text-2xl font-semibold whitespace-nowrap ">
-            {/* <p className="text-4xl h-12 font-bold mr-2 bg-gradient-to-r from-indigo-600  to-pink-200 text-transparent bg-clip-text ps-5 md:ps-0">
-              Bayzid 
-            </p> */}
+           className="flex items-center self-center text-2xl font-semibold whitespace-nowrap ">           
              <a href='/'
            className="flex items-center ml-4 self-center text-3xl font-semibold whitespace-nowrap ">
             <img src={logo2} alt="" className='w-[50px]' />
@@ -143,7 +139,7 @@ const Header = ({setSelectedPage, selectedPage}) => {
 </div>
   </div>
 
-<Menu selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+<Menu setMenuToggle={setMenuToggle} menuToggle={menuToggle} />
 </div>
     </div>
   

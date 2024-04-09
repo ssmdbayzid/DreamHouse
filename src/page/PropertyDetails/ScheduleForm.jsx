@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
 import { bookingSchema } from '../../schema';
 import { useBookingPropertyMutation } from '../../app/features/propertiesApiSlice';
 import { useFormik } from 'formik';
+import {useSelector} from 'react-redux'
+import {toast} from "react-toastify"
+
 
 const initialValues = {
   name: '',
@@ -12,16 +16,24 @@ const initialValues = {
 const ScheduleForm = () => {
   const [bookingProperty] = useBookingPropertyMutation()
   const [loading, setLoading] = useState(false)
- const id = "asfsdaf"
+  const {id} = useParams()
  
-  const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
+  const user = useSelector(state=>state.user.user);
+  const navigate = useNavigate()
+  
+  const {values, errors, touched, setValues, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: initialValues,
     validationSchema: bookingSchema,
     onSubmit: async (values) => {
+      if(!user){
+        toast.error("Log in first")
+        return navigate("/log-in")
+
+      } 
       console.log("🚀 ~ onSubmit:async ~ values:", values)      
       setLoading(true)
       try {
-        const result = await bookingProperty({...values, id})
+        const result = await bookingProperty({...values, id, userId: user?._id})
         console.log("🚀 ~ onSubmit:async ~ result:", result)
         setLoading(false)
       } catch (error) {
@@ -30,6 +42,14 @@ const ScheduleForm = () => {
       } 
     }
   })
+
+  
+  useEffect(()=>{
+    if(user){
+      setValues({...values, name: user?.name, email: user?.email})
+    }
+  },[user])
+ 
 
 
   return (
@@ -82,7 +102,7 @@ const ScheduleForm = () => {
           className="mb-3 w-full border px-3 py-3"
         />
          {errors.date && touched.date && 
-     <p class='text-red-600 text-sm pb-1'>{errors.date}</p>}
+     <p className='text-red-600 text-sm pb-1'>{errors.date}</p>}
         <button 
         type='submit'
         className="w-full rounded-md bg-blue-500 py-3 text-white">

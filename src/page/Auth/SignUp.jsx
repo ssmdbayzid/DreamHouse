@@ -5,6 +5,7 @@ import { signUpSchema } from '../../schema'
 import { useSignupMutation } from '../../app/features/propertiesApiSlice'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import GoogleSignIn from '../../component/GoogleSignIn'
 
 
 
@@ -106,20 +107,8 @@ const  [signup] = useSignupMutation()
       {loading && "loading "}Join
     </button>
   </form>
-  {/*
-    --------------------------- Pending authentication --------------------
   
-  <div className="my-1 flex items-center justify-between gap-3">
-    <hr className="h-0.5 w-1/3 bg-slate-300" />
-    <span>or</span>
-    <hr className="h-0.5 w-1/3 bg-slate-300" />
-  </div>
-  <p className="flex items-center justify-center gap-3 border-purple-300 border-2 bg-slate-200 py-1 text-center text-xl font-light">
-    <span className="inline-block bg-gradient-to-tr from-purple-500 to-blue-600 bg-clip-text text-2xl font-semibold text-transparent">
-      G
-    </span>{" "}
-    Google
-  </p> */}
+  <GoogleSignIn />
 </div>
 
     </section>

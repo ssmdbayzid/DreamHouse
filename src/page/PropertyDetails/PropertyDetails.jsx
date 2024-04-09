@@ -43,14 +43,14 @@ const PropertyDetails = () => {
       loading && !property ? <Loader /> 
       : 
       <>
-    {property && <> <div className="px-4 md:py-5 mb-5 bg-white rounded-md  flex items-center justify-between">
+    {property && <> <div className="px-4 md:py-5 mb-5 bg-white rounded-md  flex md:flex-row flex-col items-center justify-between">
     <div className="">
       <h1 className="text-2xl font-bold">{property?.title}</h1>
-      <p className="text-slate-400">{property?.street}</p>
+      <p className="md:text-start text-center text-slate-400">{property?.street}</p>
     </div>
-    <div className="">
+    <div className="md:mt-0 mt-5">
       <h1 className="text-2xl font-bold capitalize">${property?.price} / {property?.rent_duration}</h1>
-      <p className="text-right text-slate-400">Price</p>
+      <p className="text-center md:text-right text-slate-400">Price</p>
     </div>
   </div>
   <div className="  flex  bg-white flex-col gap-3 md:flex-row">
@@ -77,7 +77,7 @@ const PropertyDetails = () => {
   <div className="flex items-start justify-end md:flex-row flex-col mt-10 gap-3">
     <div className="w-full md:w-2/3 md:px-0 px-4">
     <div className="bg-white px-5 py-10 rounded-md">
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center md:flex-row flex-col justify-between ">
         <h3 className='text-lg font-bold'>Overview</h3>
         <p className='font-bold'>Property ID: <span className='font-normal'>{property?._id}</span> </p>
       </div>
@@ -88,7 +88,7 @@ const PropertyDetails = () => {
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><FaUserAlt /> Agent</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">{property?.agent_name}</h3>
+          <h3 className="text-nowrap text-md text-slate-600 font-semibold pl-5">{property?.agent_name}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><FaRegCalendarAlt /> Listed</p>
@@ -96,7 +96,7 @@ const PropertyDetails = () => {
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><FaDollarSign /> Rent</p>
-          <h3 className="text-md text-slate-600 font-semibold pl-5">${property?.price} / {property?.rent_duration}</h3>
+          <h3 className="text-md text-slate-600 font-semibold pl-5 text-nowrap">${property?.price} / {property?.rent_duration}</h3>
         </div>
         <div className=''>
           <p className='flex items-center gap-2 mb-4 text-slate-500 text-md '><IoBedOutline /> Bed</p>
@@ -211,7 +211,7 @@ export default PropertyDetails;
 
   {/*
     <>
-    <div class="flex flex-wrap items-center justify-start md:justify-between  w-full">
+    <div className="flex flex-wrap items-center justify-start md:justify-between  w-full">
     <div>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Air Conditioning</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Barbeque</p>
@@ -220,14 +220,14 @@ export default PropertyDetails;
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Washer</p>
 
     </div>
-    <div class="">
+    <div className="">
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Laundry</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Lawn</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Microwave</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Outdoor Shower</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> WiFi</p>
     </div>
-    <div class="">
+    <div className="">
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Refrigerator</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Sauna</p>
     <p className='flex items-center gap-2 mb-4 text-slate-500'> <IoIosArrowDropright className='text-xl' /> Swimming Pool</p>

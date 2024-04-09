@@ -16,7 +16,7 @@ const FavoriteItem = () => {
   const  [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
   const favoriteItems = useSelector((state)=>state.favoriteItem.favoriteItems)
-  console.log(favoriteItems)
+  console.log(favoriteItems?.length)
 
   useEffect(()=>{
     setLoading(true)
@@ -26,7 +26,7 @@ const FavoriteItem = () => {
   },[favoriteItems])
 
   return (
-    <div className=''>
+    <div className='min-h-[90dvh]'>
       <h2 className='bg-gradient-to-bl from-primaryColor/5 to-white text-center text-2xl bg-green-200 py-5'>Favorite Property</h2>
       
       {loading ? <Loader />:      
@@ -44,7 +44,7 @@ const FavoriteItem = () => {
      
       <div className='absolute bottom-0 w-full'>
         <div className="flex justify-between">
-        <p className=" text-white py-3 px-4  text-center  blur-[0.5px] bg-black/80">
+        <p title='Remove from favorite' className=" text-white py-3 px-4  text-center  blur-[0.5px] bg-black/80">
           <FaRegHeart className='cursor-pointer' onClick={()=>dispatch(removeFavoriteItem(item))} /></p>   
           
         <p className="w-1/3 text-white ml-auto py-3 text-sm text-center rounded-tl-xl blur-[0.5px] bg-black/80">${item.price} <span className="text-yellow-400">/ {item.rent_duration}</span></p>   
@@ -84,7 +84,15 @@ const FavoriteItem = () => {
        
        </div>             
        </div>          
-    </div>)}  
+    </div>     
+  )}  
+    </div>}
+    {favoriteItems?.length < 1 && 
+<div className="w-72 mx-auto text-center">
+  <img src="https://i.pinimg.com/originals/80/f8/7f/80f87f1b1c82ecfa224194e5d8532c60.gif" alt="" />
+      <h1 className="text-2xl font-bold ">No favorite Items</h1>
+<p className=' mb-10'>You cann add an items to your favorite item by clicking "Heart Icon"</p>
+<a href='/properties' className=" py-2  bg-blue-600  rounded-full px-10 text-white">Go Back</a>
     </div>}
     </div>
   )

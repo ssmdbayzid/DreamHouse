@@ -3,10 +3,11 @@ import logo from '../../assets/logo 2.png'
 import { useFormik } from 'formik'
 import { loginSchema } from '../../schema'
 import { useLoginMutation } from '../../app/features/propertiesApiSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setUser } from '../../app/features/userSlice'
-import axios from 'axios'
+
 import { useNavigate } from 'react-router-dom'
+import GoogleSignIn from '../../component/GoogleSignIn'
 
 
 
@@ -40,39 +41,6 @@ const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFor
   }
 })
 
-
-const fetchAuthUser = async () =>{
-  const response = await axios.get("http://localhost:5000/api/v1/auth/user", {withCredentials: true})
-  .catch(err=>{
-    console.log(err)
-  console.log("error: Cannot properly authenticate")
-  })
-  if(response && response?.data){
-    console.log(response.data)
-  }
-}
-
-  const redirectToGoogle = () =>{
-    let timer = null;
-    const googleLoginUrl = "http://localhost:5000/api/v1/login/google"
-      const newWindow = window.open(
-        googleLoginUrl,
-        "_black",
-        "width=500,height=600",
-      )
-
-      if(newWindow){
-        timer = setInterval(()=>{
-         if(newWindow.closed){
-          fetchAuthUser()
-          console.log("yea  we  are authotized")
-          if(timer){
-            clearInterval(timer)
-          }}
-        }, 500)
-      }
-    
-  }
 
   return (
     <section className='min-h-screen bg-gradient-to-br from-blue-400 via-slate-200 to-green-400 md:px-0 px-5 flex items-center justify-center  '>
@@ -115,19 +83,7 @@ const fetchAuthUser = async () =>{
      {loading && "loading..."} Log In
     </button>
   </form>
-  {/*
-    --------------------------- Pending authentication --------------------
-  <div className="my-5 flex items-center justify-between gap-3">
-    <hr className="h-0.5 w-1/3 bg-slate-300" />
-    <span>or</span>
-    <hr className="h-0.5 w-1/3 bg-slate-300" />
-  </div>
-  <p onClick={redirectToGoogle} className=" cursor-pointer flex items-center justify-center gap-3 border-purple-300 border-2 bg-slate-200 py-1 text-center text-xl font-light">
-    <span className="inline-block bg-gradient-to-tr from-purple-500 to-blue-600 bg-clip-text text-xl font-semibold text-transparent">
-      G
-    </span>{" "}
-    Google
-     </p>*/}
+  <GoogleSignIn />
 </div>
 
     </section>

@@ -7,10 +7,12 @@ import { FaHeart, FaSignOutAlt } from "react-icons/fa";
 import { GoChecklist } from "react-icons/go";
 import { HiMiniUsers } from "react-icons/hi2";
 import { MdDashboard } from "react-icons/md";
-
+import {useSelector} from 'react-redux'
 const SideBar = ({showSideBar, setShowSideBar}) => {
+  const user = useSelector(state=>state.user.user)
 
 
+  console.log(user)
   return (
     <aside
   id="sidebar-multi-level-sidebar"
@@ -25,8 +27,9 @@ const SideBar = ({showSideBar, setShowSideBar}) => {
 </div>
     <div className="">
       <div className="mb-6">
-        <img src="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg" alt="" className='w-20 h-full mx-auto'/>
-        <p className='text-center font-semibold'>user?.email</p>
+        <img 
+        src={user.photo ? user?.photo : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"} alt="" className='w-20 h-full mx-auto'/>
+        {user && <p className='text-center font-semibold'>{user?.email}</p>}
       </div>
     </div>
     <ul className="space-y-2  font-medium">

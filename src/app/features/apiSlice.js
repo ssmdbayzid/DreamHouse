@@ -1,11 +1,13 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { BASE_URL } from '../../utility/BASE_URL';
+
 
 
 let token = "this token"
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "https://dream-house-server-7ss1.vercel.app/api/v1/",
+    baseUrl: BASE_URL,
     prepareHeaders:(header)=> {
         if(token){
             header.set("Authorization", `Bearer ${token}`)
