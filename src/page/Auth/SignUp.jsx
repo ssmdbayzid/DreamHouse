@@ -30,7 +30,7 @@ const  [signup] = useSignupMutation()
         const result = await signup(rest)
         console.log(result?.data)        
         setLoading(false)
-        navigate("/login")
+        navigate("/log-in")
         setLoading(false)
       } catch (error) {
         console.log(error?.message)

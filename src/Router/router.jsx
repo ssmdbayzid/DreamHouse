@@ -17,6 +17,7 @@ import FavoriteItem from "../page/Dashboard/FavoriteItem";
 import LoginFailed from "../page/Auth/LoginFailed";
 import LoginSuccess from "../page/Auth/LoginSuccess";
 import MyProperties from "../page/Dashboard/MyProperties";
+import BookedProperty from "../page/Dashboard/BookedProperty";
 
 
 
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
                     {
                         path: "my-properties",
                         element: <MyProperties />
+                    },
+                    {
+                        path: "booked-properties",
+                        element: <BookedProperty />
                     },
                     {
                         path: "add-listing",

@@ -1,30 +1,35 @@
 import { apiSlice } from "./apiSlice";
 
-const propertiesApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ["Properties"]}).injectEndpoints({
-    endpoints: build => ({
-        getAllProperties: build.query({
+const propertiesApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ["Properties", "User"]}).injectEndpoints({
+    endpoints: builder => ({
+        getAllProperties: builder.query({
             query: ()=>`properties`,
             providesTags: ["Properties"]
         }),
-        getProperty: build.query({
+        getProperty: builder.query({
             query: (id)=> `properties/${id}`,
             providesTags: ["Properties"]
         }),
-        login: build.mutation({
+        login: builder.mutation({
             query: (data)=> ({
                 url:`auth/login`,
                 method: "POST",
                 body: data
             })
         }),
-        signup: build.mutation({
+        signup: builder.mutation({
             query: (data)=> ({
                 url:`auth/register`,
                 method: "POST",
                 body: data
-            })
+            }),
+            invalidatesTags: ["User"]
         }),
-        addProperty: build.mutation({
+        getSingleUser: builder.query({
+            query: (id)=> `auth/user/${id}`  ,
+            providesTags: ["User"]
+        }),
+        addProperty: builder.mutation({
             query: (data)=> ({
                 url: `properties`,
                 method: "POST",
@@ -32,7 +37,7 @@ const propertiesApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ["Properties"
             }),
             invalidatesTags: ["Properties"]
         }),
-        addComment: build.mutation({
+        addComment: builder.mutation({
             query: ({id, ...rest})=> ({
                 url: `properties/${id}/comments`,
                 method: "POST",
@@ -40,13 +45,13 @@ const propertiesApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ["Properties"
             }),
             invalidatesTags: ["Properties"]
         }),
-        bookingProperty: build.mutation({
+        bookingProperty: builder.mutation({
             query: ({id, ...rest})=> ({
                 url: `properties/${id}`,
                 method: "POST",
                 body: rest
             }),
-            invalidatesTags: ["Properties"]
+            invalidatesTags: ["Properties", "User"]
         }),
     })
 })
@@ -58,5 +63,6 @@ export const {
     useLoginMutation,
     useSignupMutation,
     useAddCommentMutation,
-    useBookingPropertyMutation
+    useBookingPropertyMutation,
+    useGetSingleUserQuery,
 } = propertiesApiSlice;

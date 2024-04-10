@@ -54,7 +54,7 @@ const navLinks = [
    <ul className='mt-10 w-full'>
    <li  
    onClick={()=>setMenuToggle(!menuToggle)}>
-      <a href='/login' className='bg-primaryColor text-white rounded-full mb-2 py-2 text-lg flex justify-center items-center '
+      <a href='/log-in' className='bg-primaryColor text-white rounded-full mb-2 py-2 text-lg flex justify-center items-center '
        >
         Log In
         </a>

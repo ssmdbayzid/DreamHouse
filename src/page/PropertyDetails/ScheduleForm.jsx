@@ -34,7 +34,7 @@ const ScheduleForm = () => {
       setLoading(true)
       try {
         const result = await bookingProperty({...values, id, userId: user?._id})
-        console.log("🚀 ~ onSubmit:async ~ result:", result)
+        navigate("/dashboard/booked-properties")
         setLoading(false)
       } catch (error) {
         console.log("🚀 ~ onSubmit:async ~ error:", error.message)      

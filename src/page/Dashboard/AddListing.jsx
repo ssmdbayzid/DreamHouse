@@ -5,6 +5,8 @@ import ImageUpload from '../../utility/ImageUpload'
 
 import {uploadToCludinary} from '../../hooks/uploadToCludinary'
 import { useAddPropertyMutation } from '../../app/features/propertiesApiSlice'
+import {useSelector} from 'react-redux'
+
 const checkboxData = 
 [
   {
@@ -94,15 +96,17 @@ const AddListing = () => {
   const [inputFiles, setInputFiles] = useState(null)
   const [inputFilesError, setInputFilesError] = useState("")
   const [addProperty] = useAddPropertyMutation()
-
+  
   const [loading, setLoading] = useState(false)
+  const user = useSelector(state=>state?.user?.user)
 
+  if(!user)setLoading(true)
   const {values, setValues, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: initialValues,        
     validationSchema: propertySchema,
     onSubmit: async(values) => {
-      
-      // --------- Image Uploading to Cloudinary
+      if(user){
+      // --------- Image Uploading to Cloudinary      
       const images = [];
       if(!inputFiles?.length) return   setInputFilesError("Photo is required")    
       for(let i = 0; i < inputFiles?.length; i++){      
@@ -111,13 +115,14 @@ const AddListing = () => {
       }      
       setLoading(true)
       try {
-        const result = await addProperty({...values, images: images})        
+        const result = await addProperty({...values, images: images, userId:user?._id})        
         console.log(result)
       setLoading(false)
       } catch (error) {
         console.log(result?.error)        
       }          
     }
+  }
   })
   
  

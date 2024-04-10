@@ -53,18 +53,18 @@ const PropertyDetails = () => {
       <p className="text-center md:text-right text-slate-400">Price</p>
     </div>
   </div>
-  <div className="  flex  bg-white flex-col gap-3 md:flex-row">
-    <div className="w-full h-full md:w-2/3">
+  <div className="  flex  bg-white flex-col gap-5 md:flex-row">
+    <div className="w-full h-full ">
       <img
         src={property?.images[0]}
         className="h-full w-full object-cover"
         alt=""
       />
     </div>
-    <div className="flex 7 flex-row gap-3 overflow-hidden md:w-1/3 md:flex-col">
+    <div className="flex  flex-row gap-5 overflow-hidden md:w-1/3 md:flex-col">
       <img
         src={property?.images[1]}
-        className="h-full w-full object-cover md:w-full"
+        className="h-full w-full object-cover "
         alt=""
       />
       <img
