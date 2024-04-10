@@ -68,7 +68,7 @@ const PropertyDetails = () => {
         alt=""
       />
       <img
-        src={property?.images[2]}
+        src={property?.images[2] ? property?.images[2] : "https://demo01.houzez.co/wp-content/uploads/2016/03/040-1170x785.jpg"}
         className="h-full w-1/2 object-cover md:w-full"
         alt=""
       />

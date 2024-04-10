@@ -102,14 +102,14 @@ const Header = ({setSelectedPage, selectedPage}) => {
           </ul>
           <>
           {user ?
-          <div className="relative">  
-           <NavLink to="/dashboard" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-semibold"
-            : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}>Dasboard</NavLink>           
+          <div className="relative font-medium">  
+           <NavLink to="/dashboard" className={navClass => navClass.isActive ? "mr-5 text-primaryColor transition duration-500 cursor-pointer font-semibold"
+            : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer mr-5"}>Dasboard</NavLink>           
             <button onClick={()=>dispatch(logOut())}  className='px-4 py-2 bg-primaryColor text-white'>Logout</button>
             
            
           </div>
-           :<ul className='font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
+           :<ul className=' font-medium flex items-center rounded-lg  flex-row md:space-x-8 rtl:space-x-reverse'>
           <NavLink to="/log-in" className={navClass => navClass.isActive ? "text-primaryColor transition duration-500 cursor-pointer font-semibold"
             : "text-slate-400 hover:text-primaryColor transition duration-500 cursor-pointer"}>Log In</NavLink>
           <NavLink  to="/sign-up" className={navClass => navClass.isActive ? "px-4 py-1.5 bg-primaryColor text-white transition duration-500 cursor-pointer font-semibold"

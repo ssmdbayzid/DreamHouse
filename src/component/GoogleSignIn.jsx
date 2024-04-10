@@ -31,23 +31,23 @@ const GoogleSignIn = () => {
 
             console.log(userData)
             
-            // fetch(`${BASE_URL}auth/google/login`, {
-            //     method: "POST",
-            //     headers: {
-            //         "content-type" : "application/json"
-            //     },
-            //     body: JSON.stringify(userData)
-            // })
-            // .then(response=>response.json())
-            // .then(data=> {
+            fetch(`${BASE_URL}auth/google/login`, {
+                method: "POST",
+                headers: {
+                    "content-type" : "application/json"
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response=>response.json())
+            .then(data=> {
                 
-            //     dispatch(setUser(data?.user))
-            //     localStorage.setItem("accessToken", (data?.token))
-            //     setLoading(false)
-            //     navigate("/")
-            //     window.location.reload()
-            // })
-            // .catch(err=>console.log(err))
+                dispatch(setUser(data?.user))
+                localStorage.setItem("accessToken", (data?.token))
+                setLoading(false)
+                navigate("/")
+                window.location.reload()
+            })
+            .catch(err=>console.log(err))
         }            
         } catch (error) {
             
